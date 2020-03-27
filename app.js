@@ -17,14 +17,17 @@ var conn = mysql.createConnection({
   database: 'mydb',
   host: "localhost",
   user: "root",
-  password: "root"
+  password: "password"
 });
  
 conn.connect(function(err) {
   if (err) throw err;
   console.log("Connected!");
-var User = '';
-console.log(CRUDUser.getAllUsers(conn));  
+  CRUDUser.getAllUsers(conn, function(result){
+    stuffIWant = result;
+    console.log(stuffIWant)
+    } 
+  );  
 });
 
 
