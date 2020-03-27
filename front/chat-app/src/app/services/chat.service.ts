@@ -9,12 +9,6 @@ export class ChatService {
     currentRoom = this.socket.fromEvent<Room>('room');
     rooms = this.socket.fromEvent<any>('rooms');
 
-    roomsLOGIC = [
-        {
-            'id':1,
-            'name':'test'
-        }
-    ];
 
     constructor(private socket: Socket){}
 
@@ -22,19 +16,14 @@ export class ChatService {
         this.socket.emit('getRoom', roomId);
     }
 
-
-
+    //TODO: Ajouter le UserId correspondant à addRoom
     addRoom(roomName: string){
         const roomObject = {
-            'id' : 0,
+            'id' : null,
             'name' : '',
             'userId':1 //ON EST EN DUR ICI POUR LE TEST VERS LA BDD
         };
-        
         roomObject.name = roomName;
-        roomObject.id = this.roomsLOGIC[(this.roomsLOGIC.length - 1)].id +1;
-        this.roomsLOGIC.push(roomObject);
-        
         this.socket.emit('addRoom' , roomObject);
     }
 
