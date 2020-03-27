@@ -6,12 +6,11 @@ var getUserById = function(conn, id) {
 }
 
 // Select All from User : 
-var getAllUsers = function(conn) {
-    var test = 2;
-    // console.log("testCoucou")
+var getAllUsers = function(conn, callback) {
+
     conn.query("SELECT * FROM User", function (err, result, fields) {
     if (err) throw err; 
-        return result;
+        callback(result);
     });
 }
 
