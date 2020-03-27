@@ -1,3 +1,6 @@
 <ul>
-    <li (click)='loadRoom(room.id)' *ngFor='let room of rooms | async'> {{ room.nom }}</li>
+    <li (click)='loadRoom(room.id)' *ngFor='let room of rooms | async'> 
+        {{ room.nom }} 
+        <button (click)='deleteRoom(room.id)'>supprimer</button>
+    </li>
 </ul>

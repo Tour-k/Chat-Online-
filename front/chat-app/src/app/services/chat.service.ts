@@ -16,7 +16,7 @@ export class ChatService {
         }
     ];
 
-    constructor(private socket: Socket, private room : Room){}
+    constructor(private socket: Socket){}
 
     getRoom(roomId : number){    
         this.socket.emit('getRoom', roomId);
@@ -36,7 +36,10 @@ export class ChatService {
         this.roomsLOGIC.push(roomObject);
         
         this.socket.emit('addRoom' , roomObject);
+    }
 
+    deleteRoom(roomId: number){
+        this.socket.emit('deleteRoom', roomId);
     }
 
 

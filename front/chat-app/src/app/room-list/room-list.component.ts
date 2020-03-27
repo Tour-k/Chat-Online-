@@ -28,5 +28,9 @@ export class RoomListComponent implements OnInit, OnDestroy {
     this.chatService.getRoom(id);
   }
 
+  deleteRoom(id:number){
+    this.chatService.deleteRoom(id);
+  }
+
 
 }
