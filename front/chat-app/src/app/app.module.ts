@@ -14,6 +14,8 @@ import { CreateAccountComponent } from './create-account/create-account.componen
 import { ChannelComponent } from './channel/channel.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { FourOhFourComponent } from './four-oh-four/four-oh-four.component';
+import { RoomListComponent } from './room-list/room-list.component';
+import { Room } from 'src/models/room';
 
 const config : SocketIoConfig = {  url: 'http://localhost:8988', options: {} };
 
@@ -26,7 +28,9 @@ const config : SocketIoConfig = {  url: 'http://localhost:8988', options: {} };
     ChannelComponent,
     UserProfileComponent,
     FourOhFourComponent,
-    ChatComponent
+    AppComponent,
+    ChatComponent,
+    RoomListComponent
   ],
   imports: [
     BrowserModule,
@@ -35,7 +39,7 @@ const config : SocketIoConfig = {  url: 'http://localhost:8988', options: {} };
 
     SocketIoModule.forRoot(config)
   ],
-  providers: [ChatService],
+  providers: [ChatService, Room],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

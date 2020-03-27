@@ -57,15 +57,18 @@ conn.connect(function(err) {
     //ajouter d'un channel
     socket.on("addRoom", room => {
       //logique bidon à remplacer avec mysql
-      console.log(room)
-      
+      // console.log(room)
       CRUDChannel.createChannel(conn, String(room.name), parseInt(room.userId), function(res){
         console.log(res)
       })
-      rooms.push(room);
+      
       safeJoin(room.id);
-      // io.emit("rooms", rooms);  // emitting broadcast 
-      // socket.emit("room", room); // emitting back to client
+      CRUDChannel.getAllChannels(conn, function(res){
+        rooms = res;
+        io.emit("rooms", rooms);
+      })
+        // emitting broadcast 
+      socket.emit("room", room); // emitting back to client
     });
 
     //Envoyer un message
