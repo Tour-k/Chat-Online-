@@ -1,1 +1,3 @@
-<p>room-list works!</p>
+<ul>
+    <li (click)='loadRoom(room.id)' *ngFor='let room of rooms | async'> {{ room.nom }}</li>
+</ul>

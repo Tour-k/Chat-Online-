@@ -7,7 +7,7 @@ import { Room } from 'src/models/room';
 export class ChatService { 
 
     currentRoom = this.socket.fromEvent<Room>('room');
-    rooms = this.socket.fromEvent<string[]>('rooms');
+    rooms = this.socket.fromEvent<any>('rooms');
 
     roomsLOGIC = [
         {
@@ -18,7 +18,7 @@ export class ChatService {
 
     constructor(private socket: Socket, private room : Room){}
 
-    getRooms(roomId : number){    
+    getRoom(roomId : number){    
         this.socket.emit('getRoom', roomId);
     }
 
