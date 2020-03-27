@@ -1,0 +1,9 @@
+<h2>Formulaire Channel</h2>
+
+<form (ngSubmit)="onSubmit(f)" #f="ngForm">
+    <label for="roomName">Room name</label>
+    <input type="text" id="roomName" name="roomName" ngModel required>
+    <button type="submit" [disabled]="f.invalid">
+        Save
+    </button>
+</form>
