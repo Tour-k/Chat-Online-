@@ -10,14 +10,13 @@ import { ChatService } from '../services/chat.service';
 })
 export class ChatComponent implements OnInit {
 
-  constructor(private chatService : ChatService) { }
+  constructor(private chatService: ChatService) { }
 
   ngOnInit(): void {
   }
 
   onSubmit(form: NgForm) {
     const roomName = form.value['roomName'];
-    console.log(roomName);
     this.chatService.addRoom(roomName);
   }
 }
