@@ -24,11 +24,46 @@ conn.connect(function(err) {
   if (err) throw err;
   console.log("Connected to database !");
   
-  username = 'Username6';
-   CRUDUser.getUserByUsername(conn, username, function(result){
-     user = result;
-     console.log(user);
-   });
+ 
+  //   id = 4;
+  //  avatar="'path/image2'";
+  // CRUDUser.updateUserBio(conn, id, avatar, function(result){
+  //   msgSuccess = result;
+  //   console.log(msgSuccess);
+  // }); 
+  
+  
+  //   id = 4;
+    //   bio="'bio non bio'";
+    //  CRUDUser.updateUserBio(conn, id, bio, function(result){
+    //    msgSuccess = result;
+    //    console.log(msgSuccess);
+    //  });
+  
+  
+  
+  // username = "'test1'";
+    // password = "'ChocoBisous'";
+    // bio= "'Petite bio sans pesticide'";
+    // avatar="'path/images'";
+    //  CRUDUser.createUser(conn, username, password, bio, avatar,function(result){
+    //    msgSuccess = result;
+    //    console.log(msgSuccess);
+    //  });
+  
+  
+  //  id = 1;
+  //   CRUDUser.deleteUser(conn, id, function(result){
+  //     msgSuccess = result;
+  //     console.log(msgSuccess);
+  //   });
+
+
+  // username = "'Username6'";
+  //  CRUDUser.getUserByUsername(conn, username, function(result){
+  //    user = result;
+  //    console.log(user);
+  //  });
 
 
   // CRUDUser.getUserById(conn, 1, function(result){

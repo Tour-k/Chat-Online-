@@ -13,8 +13,6 @@ export class ChatService {
     }
 
 
-
-
     addRoom(room: object){
         this.socket.emit('addRoom' , room);
     }
