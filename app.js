@@ -17,26 +17,41 @@ var conn = mysql.createConnection({
   database: 'mydb',
   host: "localhost",
   user: "root",
-  password: "password"
+  password: "root"
 });
  
 conn.connect(function(err) {
   if (err) throw err;
-  console.log("Connected!");
+  console.log("Connected to database !");
   CRUDUser.getAllUsers(conn, function(result){
     stuffIWant = result;
     console.log(stuffIWant)
+    
     } 
   );  
 });
 
 
-// Socket.io
-// io.on('connection', function(socket){
-//     console.log('a user connected');
-//   });
+//Socket.io
+io.on("connection", socket => {
+  let previousId;
+  const safeJoin = currentId => {
+    socket.leave(previousId);
+    socket.join(currentId);
+    previousId = currentId;
+  };
+
+  socket.on("getChannel", channelId => {
+    safeJoin(channelId);
+    socket.emit("message", 'test messages');
+  });
+
+});
 
 
-// http.listen(3000, function(){
-//     console.log('listening on *:3000');
-// });
+
+
+
+http.listen(8988, function(){
+    console.log('listening on *:8988');
+});
