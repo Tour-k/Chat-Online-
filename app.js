@@ -25,7 +25,7 @@ conn.connect(function(err) {
   console.log("Connected!");
   CRUDUser.getAllUsers(conn, function(result){
     stuffIWant = result;
-    console.log(stuffIWant[0])
+    console.log(stuffIWant)
     } 
   );  
 });
