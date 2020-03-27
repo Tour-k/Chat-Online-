@@ -45,7 +45,10 @@ conn.connect(function(err) {
 });
 
 
+const rooms = {};
+
 //Socket.io
+//Connexion... pour l'instant c'est un à la fois, et on se déconnecte des qu'on passe sur
 io.on("connection", socket => {
   let previousId;
   const safeJoin = currentId => {
@@ -54,11 +57,29 @@ io.on("connection", socket => {
     previousId = currentId;
   };
 
-  socket.on("getChannel", channelId => {
-    safeJoin(channelId);
-    socket.emit("message", 'test messages');
+  //récupération d'un channel 
+  socket.on("getRoom", roomId => {
+    safeJoin(roomId);
+    socket.emit("room", rooms[roomId]);  // initiating client only
   });
 
+  //ajouter d'un channel
+  socket.on("addRoom", room => {
+    //logique bidon à remplacer avec mysql
+    channels[room.id] = room;
+    safeJoin(room.id);
+    io.emit("rooms", rooms);  // emitting broadcast 
+    socket.emit("room", room); // emitting back to client
+  });
+
+  //Envoyer un message
+  socket.on("message", msg => {
+    rooms[msg.id] = msg;
+    socket.to(msg.id).emit("rooms", msg); // emit to only the clients that are currently viewing that document
+  });
+
+  // Récupérer les rooms
+  io.emit("rooms", rooms);
 });
 
 
