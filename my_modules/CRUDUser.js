@@ -23,7 +23,6 @@ var getAllUsers = function(conn, callback) {
 // GET USER BY USERNAME (test OK)
 // ___________________________________
 var getUserByUsername = function(conn, username, callback){
-    console.log(username);
     conn.query("SELECT * FROM User WHERE username =" + username, 
     function (err, result, fields) {
         if (err) throw err;
