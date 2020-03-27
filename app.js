@@ -2,6 +2,7 @@ const app = require('express')();
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
 var CRUDUser = require('./my_modules/CRUDUser');
+var CRUDChannel = require('./my_modules/CRUDChannel');
 
 
 
@@ -23,12 +24,14 @@ var conn = mysql.createConnection({
 conn.connect(function(err) {
   if (err) throw err;
   console.log("Connected to database !");
-  CRUDUser.getAllUsers(conn, function(result){
-    stuffIWant = result;
-    // console.log(stuffIWant)
+
+//   CRUDUser.getAllUsers(conn, function(result){
+//     stuffIWant = result;
+//     // console.log(stuffIWant)
     
-    } 
-  );  
+//     } 
+//   );  
+//
 });
 
 

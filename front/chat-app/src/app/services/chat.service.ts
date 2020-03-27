@@ -19,6 +19,7 @@ export class ChatService {
     }
 
 
+
     addRoom(roomName: string){
         const roomObject = {
             'id' : 0,
@@ -29,8 +30,8 @@ export class ChatService {
         this.rooms.push(roomObject);
         console.log(roomObject);
         this.socket.emit('addRoom' , roomObject);
-    }
 
+    }
 
 
     sendMessage(msg: string){
