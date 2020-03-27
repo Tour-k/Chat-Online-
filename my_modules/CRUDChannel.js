@@ -49,7 +49,7 @@ var createChannel = function(conn, ChannelName, userId, callback){
     var sql = "INSERT INTO Channel VALUES (NULL, '" + ChannelName + "', " + userId +")";
     conn.query(sql, function (err, result) {
     if (err) throw err;
-        msgSuccess = ChannelName + "inserted"
+        msgSuccess = ChannelName + " inserted"
         callback(msgSuccess);   
 }); 
 }

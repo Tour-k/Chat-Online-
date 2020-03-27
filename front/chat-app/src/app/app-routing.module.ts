@@ -7,12 +7,14 @@ import { LoginWithAccountComponent } from './login-with-account/login-with-accou
 import { CreateAccountComponent } from './create-account/create-account.component';
 import { ChannelComponent } from './channel/channel.component';
 import { FourOhFourComponent } from './four-oh-four/four-oh-four.component';
+import { ChatComponent } from './chat/chat.component';
 
 
 const routes: Routes = [
   {path: 'login-with-account', component: LoginWithAccountComponent},
   {path: 'accueil', component: AccueilComponent},
   {path: 'channel', component: ChannelComponent},
+  {path: 'chat', component: ChatComponent},
   {path: 'create-account', component: CreateAccountComponent},
   {path: 'user-profile', component: UserProfileComponent},
   { path: 'not-found', component: FourOhFourComponent },
