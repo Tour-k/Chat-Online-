@@ -46,7 +46,7 @@ var deleteChannel = function(conn, id, callback){
 // CREATE CHANNEL (test OK)
 // ___________________________________
 var createChannel = function(conn, ChannelName, userId, callback){
-    var sql = "INSERT INTO Channel VALUES (NULL," + ChannelName + "," + userId+")";
+    var sql = "INSERT INTO Channel VALUES (NULL, '" + ChannelName + "', " + userId +")";
     conn.query(sql, function (err, result) {
     if (err) throw err;
         msgSuccess = ChannelName + "inserted"

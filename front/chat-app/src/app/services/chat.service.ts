@@ -23,7 +23,8 @@ export class ChatService {
     addRoom(roomName: string){
         const roomObject = {
             'id' : 0,
-            'name' : ''
+            'name' : '',
+            'userId':1 //ON EST EN DUR ICI POUR LE TEST VERS LA BDD
         }
         roomObject.name = roomName;
         roomObject.id = this.rooms[(this.rooms.length - 1)].id +1;
