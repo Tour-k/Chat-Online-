@@ -1,11 +1,16 @@
-var getUserById = function(conn, id) {
+// ___________________________________
+// GET USER BY ID
+// ___________________________________
+var getUserById = function(conn, id, callback) {
     conn.query("SELECT * FROM User WHERE id=" + id, function (err, result, fields) {
         if (err) throw err;
-            return(result);
+            callback(result);
         });
 }
 
-// Select All from User : 
+// ___________________________________
+// GET USER ALL USER
+// ___________________________________
 var getAllUsers = function(conn, callback) {
 
     conn.query("SELECT * FROM User", function (err, result, fields) {
@@ -14,13 +19,15 @@ var getAllUsers = function(conn, callback) {
     });
 }
 
-
-// Select by username from User : 
-var getUserByUsername = function(conn, username) {
-    conn.query("SELECT * FROM User WHERE username = "+ username, 
+// ___________________________________
+// GET USER BY USERNAME
+// ___________________________________
+var getUserByUsername = function(conn, username, callback){
+    console.log("test");
+    conn.query("SELECT * FROM User WHERE username =" + username, 
     function (err, result, fields) {
         if (err) throw err;
-        return result;
+        callback(result);
     });
 }
 

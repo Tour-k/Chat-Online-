@@ -23,12 +23,25 @@ var conn = mysql.createConnection({
 conn.connect(function(err) {
   if (err) throw err;
   console.log("Connected to database !");
-  CRUDUser.getAllUsers(conn, function(result){
-    stuffIWant = result;
-    console.log(stuffIWant)
-    
-    } 
-  );  
+  
+  username = 'Username6';
+   CRUDUser.getUserByUsername(conn, username, function(result){
+     user = result;
+     console.log(user);
+   });
+
+
+  // CRUDUser.getUserById(conn, 1, function(result){
+  //   user = result;
+  //   console.log(user);
+  // });
+
+
+  // CRUDUser.getAllUsers(conn, function(result){
+  //   users = result;
+  //   console.log(users); 
+  //   } 
+  // );  
 });
 
 
