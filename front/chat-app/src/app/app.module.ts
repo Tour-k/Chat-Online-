@@ -8,10 +8,24 @@ import { FormsModule } from '@angular/forms';
 import { ChatService } from './services/chat.service';
 
 
-const config : SocketIoConfig = {  url: 'http://localhost:8988', options: {} }; 
+import { AccueilComponent } from './accueil/accueil.component';
+import { LoginWithAccountComponent } from './login-with-account/login-with-account.component';
+import { CreateAccountComponent } from './create-account/create-account.component';
+import { ChannelComponent } from './channel/channel.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
+import { FourOhFourComponent } from './four-oh-four/four-oh-four.component';
+
+const config : SocketIoConfig = {  url: 'http://localhost:8988', options: {} };
 
 @NgModule({
   declarations: [
+    AppComponent,
+    AccueilComponent,
+    LoginWithAccountComponent,
+    CreateAccountComponent,
+    ChannelComponent,
+    UserProfileComponent,
+    FourOhFourComponent,
     AppComponent,
     ChatComponent
   ],
@@ -19,7 +33,7 @@ const config : SocketIoConfig = {  url: 'http://localhost:8988', options: {} };
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    
+
     SocketIoModule.forRoot(config)
   ],
   providers: [ChatService],
