@@ -26,7 +26,6 @@ const config : SocketIoConfig = {  url: 'http://localhost:8988', options: {} };
     ChannelComponent,
     UserProfileComponent,
     FourOhFourComponent,
-    AppComponent,
     ChatComponent
   ],
   imports: [
