@@ -25,22 +25,24 @@ conn.connect(function(err) {
   console.log("Connected to database !");
   CRUDUser.getAllUsers(conn, function(result){
     stuffIWant = result;
-    console.log(stuffIWant)
+    // console.log(stuffIWant)
     
     } 
   );  
 });
 
 
-const rooms = {};
+var rooms = []; //logique sans BDD, à remplacer 
 
 //Socket.io
 //Connexion... pour l'instant c'est un à la fois, et on se déconnecte des qu'on passe sur
 io.on("connection", socket => {
+  
   let previousId;
   const safeJoin = currentId => {
     socket.leave(previousId);
     socket.join(currentId);
+    console.log('joined to currenrId : '+currentId)
     previousId = currentId;
   };
 
@@ -53,10 +55,11 @@ io.on("connection", socket => {
   //ajouter d'un channel
   socket.on("addRoom", room => {
     //logique bidon à remplacer avec mysql
-    channels[room.id] = room;
+    console.log(room)
+    rooms.push(room);
     safeJoin(room.id);
-    io.emit("rooms", rooms);  // emitting broadcast 
-    socket.emit("room", room); // emitting back to client
+    // io.emit("rooms", rooms);  // emitting broadcast 
+    // socket.emit("room", room); // emitting back to client
   });
 
   //Envoyer un message
