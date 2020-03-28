@@ -46,7 +46,8 @@ conn.connect(function(err) {
     socket.on("getRoom", roomId => {
       safeJoin(roomId);
       CRUDMessage.getAllMessagesByChannelId(conn, roomId, (res)=>{
-        socket.emit("messages", res);  // initiating client only
+        socket.emit("messages", res); // initiating client only
+        console.log(res);
       })   
     });
 
