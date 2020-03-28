@@ -3,6 +3,7 @@ const http = require('http').Server(app);
 const io = require('socket.io')(http);
 var CRUDUser = require('./my_modules/CRUDUser');
 var CRUDChannel = require('./my_modules/CRUDChannel');
+var CRUDMessage = require('./my_modules/CRUDMessage');
 
 
 
@@ -25,19 +26,10 @@ conn.connect(function(err) {
   if (err) throw err;
   console.log("Connected to database !");
 
-//   CRUDUser.getAllUsers(conn, function(result){
-//     stuffIWant = result;
-//     // console.log(stuffIWant)
-    
-//     } 
-//   );  
-//
 
-
-  var rooms = []; //logique sans BDD, à remplacer 
-
+  // ___________________________________
   //Socket.io
-  //Connexion... pour l'instant c'est un à la fois, et on se déconnecte des qu'on passe sur
+  // ___________________________________
   io.on("connection", socket => {
     
     let previousId;
@@ -48,16 +40,20 @@ conn.connect(function(err) {
       previousId = currentId;
     };
 
-    //récupération d'un channel 
+    // ___________________________________
+    //récupération les messages d'un channel
+    // ___________________________________
     socket.on("getRoom", roomId => {
-      CRUDChannel.getChannelById(conn, roomId, res=>{
-        console.log(res);
-      })
       safeJoin(roomId);
-      socket.emit("room", rooms[roomId]);  // initiating client only
+      CRUDMessage.getAllMessagesByChannelId(conn, roomId, (res)=>{
+        socket.emit("messages", res); // initiating client only
+        console.log(res);
+      })   
     });
 
+    // ___________________________________
     //ajouter d'un channel
+    // ___________________________________
     socket.on("addRoom", room => {
       CRUDChannel.createChannel(conn, String(room.name), parseInt(room.userId), function(res){
         console.log(res)
@@ -65,12 +61,14 @@ conn.connect(function(err) {
       safeJoin(room.id);
       CRUDChannel.getAllChannels(conn, function(res){
         rooms = res;
-        io.emit("rooms", rooms);// emitting broadcast 
-      });
+        io.emit("rooms", rooms); // emitting broadcast 
+      })
       socket.emit("room", room); // emitting back to client
     });
 
-    //delete a channel
+    // ___________________________________
+    //DELETE a Channel
+    // ___________________________________
     socket.on('deleteRoom', roomId =>{
       CRUDChannel.deleteChannel(conn, roomId, res=>{
         console.log(res);
@@ -81,19 +79,29 @@ conn.connect(function(err) {
     })
   });
 
+  
     //Envoyer un message
     socket.on("message", msg => {
       rooms[msg.id] = msg;
       socket.to(msg.id).emit("rooms", msg); // emit to only the clients that are currently viewing that document
     });
 
-    // Récupérer les rooms
-    CRUDChannel.getAllChannels(conn, function(res){
-      rooms = res;
-      io.emit("rooms", rooms);// emitting broadcast  
+    // ___________________________________
+    // Récupérer les rooms à la connection 
+    // ___________________________________
+    CRUDChannel.getAllChannels(conn, (res)=>{
+      io.emit("rooms", res);
+    })
+    
+
   });
 
+  // ___________________________________
+  // retour connexion Socket
+  // ___________________________________
   http.listen(8988, function(){
       console.log('listening on *:8988');
   });
+
+
 });

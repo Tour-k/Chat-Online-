@@ -16,8 +16,8 @@ export class RoomListComponent implements OnInit, OnDestroy {
   constructor(private chatService : ChatService) { }
 
   ngOnInit(): void {
-    this.rooms = this.chatService.rooms
-    this.roomSubscription = this.chatService.currentRoom.subscribe(room => this.currentRoom = room)
+    this.rooms = this.chatService.rooms;
+    // this.roomSubscription = this.chatService.currentRoom.subscribe(room => this.currentRoom = room);
   }
   ngOnDestroy(){
     this.roomSubscription.unsubscribe()
@@ -25,7 +25,7 @@ export class RoomListComponent implements OnInit, OnDestroy {
 
   loadRoom(id:number){
     console.log(id)
-    this.chatService.getRoom(id);
+    this.chatService.getAllMessagesByRoomId(id);
   }
 
   deleteRoom(id:number){

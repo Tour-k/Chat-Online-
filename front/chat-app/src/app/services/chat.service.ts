@@ -9,12 +9,12 @@ export class ChatService {
     currentRoom = this.socket.fromEvent<Room>('room');
     rooms = this.socket.fromEvent<any>('rooms');
 
+    messages = this.socket.fromEvent<any>('messages')
+
 
     constructor(private socket: Socket){}
 
-    getRoom(roomId : number){    
-        this.socket.emit('getRoom', roomId);
-    }
+    
 
     //TODO: Ajouter le UserId correspondant à addRoom
     addRoom(roomName: string){
@@ -31,7 +31,9 @@ export class ChatService {
         this.socket.emit('deleteRoom', roomId);
     }
 
-
+    getAllMessagesByRoomId(roomId : number){    
+        this.socket.emit('getRoom', roomId);
+    }
 
     sendMessage(msg: string){
         this.socket.emit('message', msg);

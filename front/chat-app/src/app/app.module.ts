@@ -16,6 +16,7 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 import { FourOhFourComponent } from './four-oh-four/four-oh-four.component';
 import { RoomListComponent } from './room-list/room-list.component';
 import { Room } from 'src/models/room';
+import { MessageComponent } from './message/message.component';
 
 const config : SocketIoConfig = {  url: 'http://localhost:8988', options: {} };
 
@@ -30,7 +31,8 @@ const config : SocketIoConfig = {  url: 'http://localhost:8988', options: {} };
     FourOhFourComponent,
     AppComponent,
     ChatComponent,
-    RoomListComponent
+    RoomListComponent,
+    MessageComponent
   ],
   imports: [
     BrowserModule,
