@@ -81,7 +81,6 @@ conn.connect(function(err) {
     })
   });
 
-
     //Envoyer un message
     socket.on("message", msg => {
       rooms[msg.id] = msg;
@@ -94,13 +93,7 @@ conn.connect(function(err) {
       io.emit("rooms", rooms);// emitting broadcast  
   });
 
-
-
-
-
   http.listen(8988, function(){
       console.log('listening on *:8988');
   });
-
-
 });
