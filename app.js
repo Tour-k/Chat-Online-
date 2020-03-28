@@ -50,26 +50,37 @@ conn.connect(function(err) {
 
     //récupération d'un channel 
     socket.on("getRoom", roomId => {
+      CRUDChannel.getChannelById(conn, roomId, res=>{
+        console.log(res);
+      })
       safeJoin(roomId);
       socket.emit("room", rooms[roomId]);  // initiating client only
     });
 
     //ajouter d'un channel
     socket.on("addRoom", room => {
-      //logique bidon à remplacer avec mysql
-      // console.log(room)
       CRUDChannel.createChannel(conn, String(room.name), parseInt(room.userId), function(res){
         console.log(res)
       })
-      
       safeJoin(room.id);
       CRUDChannel.getAllChannels(conn, function(res){
         rooms = res;
-        io.emit("rooms", rooms);
-      })
-        // emitting broadcast 
+        io.emit("rooms", rooms);// emitting broadcast 
+      });
       socket.emit("room", room); // emitting back to client
     });
+
+    //delete a channel
+    socket.on('deleteRoom', roomId =>{
+      CRUDChannel.deleteChannel(conn, roomId, res=>{
+        console.log(res);
+      })
+      CRUDChannel.getAllChannels(conn, function(res){
+        rooms = res;
+        io.emit("rooms", rooms);
+    })
+  });
+
 
     //Envoyer un message
     socket.on("message", msg => {
@@ -78,7 +89,9 @@ conn.connect(function(err) {
     });
 
     // Récupérer les rooms
-    io.emit("rooms", rooms);
+    CRUDChannel.getAllChannels(conn, function(res){
+      rooms = res;
+      io.emit("rooms", rooms);// emitting broadcast  
   });
 
 

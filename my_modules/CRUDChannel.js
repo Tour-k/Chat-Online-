@@ -58,7 +58,7 @@ var createChannel = function(conn, ChannelName, userId, callback){
 // UPDATE CHANNEL NAME (test OK)
 // ___________________________________
 var updateChannelName = function (conn, id, channelName, callback) {
-    var sql = "UPDATE Channel SET nom = " + channelName + " WHERE id = " + id;
+    var sql = "UPDATE Channel SET nom = '" + channelName + "' WHERE id = " + id;
     conn.query(sql, function (err, result) {
         if (err) throw err;
         msgSuccess = result.affectedRows + " record(s) updated";

@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
-import { ChatService } from '../services/chat.service';
+import { ChatService } from '../services/chat.service'
 
 @Component({
   selector: 'app-room-list',
@@ -9,23 +9,28 @@ import { ChatService } from '../services/chat.service';
 })
 export class RoomListComponent implements OnInit, OnDestroy {
 
-  rooms: Observable<object>;
-  currentRoom: object;
-  roomSubscription: Subscription;
+  rooms : Observable<object>; 
+  currentRoom : object;
+  roomSubscription : Subscription; 
 
-  constructor(private chatService: ChatService) { }
+  constructor(private chatService : ChatService) { }
 
   ngOnInit(): void {
-    this.rooms = this.chatService.rooms;
-    this.roomSubscription = this.chatService.currentRoom.subscribe(room => this.currentRoom = room);
+    this.rooms = this.chatService.rooms
+    this.roomSubscription = this.chatService.currentRoom.subscribe(room => this.currentRoom = room)
   }
-  ngOnDestroy() {
-    this.roomSubscription.unsubscribe();
+  ngOnDestroy(){
+    this.roomSubscription.unsubscribe()
   }
 
-  loadRoom(id: number) {
-    console.log(id + ' test load room ');
+  loadRoom(id:number){
+    console.log(id)
     this.chatService.getRoom(id);
   }
+
+  deleteRoom(id:number){
+    this.chatService.deleteRoom(id);
+  }
+
 
 }
