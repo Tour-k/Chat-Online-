@@ -1,5 +1,5 @@
 // ___________________________________
-// GET Message By Channel Id (test OK)
+// GET All Message By Channel Id (test OK)
 // ___________________________________
 var getAllMessagesByChannelId = function(conn, channelId, callback){
     conn.query("SELECT * FROM Message WHERE Channel_id =" + channelId, 
@@ -7,6 +7,18 @@ var getAllMessagesByChannelId = function(conn, channelId, callback){
         if (err) throw err;
         callback(result);
     });
+}
+
+// ___________________________________
+// DELETE All Message By Channel Id  (test Ok)
+// ___________________________________
+var deleteAllMessageByChannelId = function(conn, channelId, callback){
+    var sql = "DELETE FROM Message WHERE Channel_id ="+ channelId;
+    conn.query(sql, function (err, result) {
+    if (err) throw err;
+    messageSuccess = "Tous les messages du channel ont été supprimé !";
+    callback(messageSuccess);
+});
 }
 
 // ___________________________________
@@ -37,5 +49,6 @@ var deleteMessage = function(conn, id, callback){
 
 
 exports.getAllMessagesByChannelId = getAllMessagesByChannelId;
+exports.deleteAllMessageByChannelId = deleteAllMessageByChannelId;
 exports.createMessage = createMessage;
 exports.deleteMessage = deleteMessage;

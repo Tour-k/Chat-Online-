@@ -70,6 +70,9 @@ conn.connect(function(err) {
     //DELETE a Channel
     // ___________________________________
     socket.on('deleteRoom', roomId =>{
+      CRUDMessage.deleteAllMessageByChannelId(conn, roomId, res=>{
+        console.log(res)
+      })
       CRUDChannel.deleteChannel(conn, roomId, res=>{
         console.log(res);
       })
