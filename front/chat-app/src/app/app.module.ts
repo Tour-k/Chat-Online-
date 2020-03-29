@@ -19,8 +19,9 @@ import { Room } from 'src/models/room';
 import { MessageComponent } from './message/message.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatInputModule} from '@angular/material/input';
+import {UserService} from './services/user.service';
 
-const config : SocketIoConfig = {  url: 'http://localhost:8988', options: {} };
+const config: SocketIoConfig = {  url: 'http://localhost:8988', options: {} };
 
 @NgModule({
   declarations: [
@@ -45,7 +46,7 @@ const config : SocketIoConfig = {  url: 'http://localhost:8988', options: {} };
 
     BrowserAnimationsModule
   ],
-  providers: [ChatService, Room],
+  providers: [ChatService, Room, UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

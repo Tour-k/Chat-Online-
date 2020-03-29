@@ -43,16 +43,30 @@ var deleteUser = function(conn, id, callback){
 }
 
 // ___________________________________
-// CREATE USER (test OK)
+// CREATE USER
 // ___________________________________
 var createUser = function(conn, username, password, bio='', avatar='', callback){
-    var sql = "INSERT INTO User VALUES (NULL," + username + "," + password + "," + bio + ","+ avatar +")";
+    var sql = "INSERT INTO user(username, password, bio, avatar) VALUES ('" +username+"','" +password+"', '" +bio+"', '" +avatar+"')";
     conn.query(sql, function (err, result) {
-    if (err) throw err;
-        msgSuccess = username + "inserted"
-        callback(msgSuccess);   
-}); 
+        if (err) throw err;
+        msgSuccess = username + " : inserted"
+        callback(msgSuccess);
+    });
 }
+
+// ___________________________________
+// CONNECT USER
+// ___________________________________
+
+var connectUser = function(conn, username, password, callback){
+    var sql = "SELECT * from user WHERE username='"+username+"' AND password='"+password+"' ";
+    conn.query(sql, function (err, result) {
+        if (err) throw err;
+        msgSuccess = username + " : connected with success"
+        callback(msgSuccess);
+    });
+}
+
 
 // ___________________________________
 // UPDATE USER BIO (test OK)
@@ -85,6 +99,7 @@ exports.deleteUser = deleteUser;
 exports.createUser = createUser;
 exports.updateUserBio = updateUserBio;
 exports.updateUserAvatar = updateUserAvatar;
+exports.connectUser = connectUser;
 
 
 

@@ -11,12 +11,12 @@ import { ChatComponent } from './chat/chat.component';
 
 
 const routes: Routes = [
-  {path : '', component:ChatComponent},
-  {path: 'login-with-account', component: LoginWithAccountComponent},
+  {path : 'chat', component: ChatComponent},
+  {path: '', component: LoginWithAccountComponent},
   {path: 'accueil', component: AccueilComponent},
   {path: 'channel', component: ChannelComponent},
   {path: 'chat', component: ChatComponent},
-  {path: 'create-account', component: CreateAccountComponent},
+  {path: 'register', component: CreateAccountComponent},
   {path: 'user-profile', component: UserProfileComponent},
   { path: 'not-found', component: FourOhFourComponent },
   { path: '**', redirectTo: 'not-found' },

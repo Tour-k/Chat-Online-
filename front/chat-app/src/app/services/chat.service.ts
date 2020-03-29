@@ -4,7 +4,7 @@ import { Room } from 'src/models/room';
 // import { map } from 'rxjs/operators';
 
 @Injectable()
-export class ChatService { 
+export class ChatService {
 
     currentRoom = this.socket.fromEvent<Room>('room');
     rooms = this.socket.fromEvent<any>('rooms');
@@ -12,16 +12,16 @@ export class ChatService {
     messages = this.socket.fromEvent<any>('messages')
 
 
-    constructor(private socket: Socket){}
+    constructor(private socket: Socket) {}
 
     
 
     //TODO: Ajouter le UserId correspondant à addRoom
     addRoom(roomName: string){
         const roomObject = {
-            'id' : null,
-            'name' : '',
-            'userId':1 //ON EST EN DUR ICI POUR LE TEST VERS LA BDD
+            id: null,
+            name: '',
+            userId: 1 //ON EST EN DUR ICI POUR LE TEST VERS LA BDD
         };
         roomObject.name = roomName;
         this.socket.emit('addRoom' , roomObject);
@@ -31,11 +31,11 @@ export class ChatService {
         this.socket.emit('deleteRoom', roomId);
     }
 
-    getAllMessagesByRoomId(roomId : number){    
+    getAllMessagesByRoomId(roomId: number) {
         this.socket.emit('getRoom', roomId);
     }
 
-    sendMessage(msg: string){
+    sendMessage(msg: string) {
         this.socket.emit('message', msg);
     }
 

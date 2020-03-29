@@ -92,6 +92,21 @@ conn.connect(function(err) {
     CRUDChannel.getAllChannels(conn, (res)=>{
       io.emit("rooms", res);
     })
+
+
+    // Creer un utilisateur
+    socket.on('newUser', user => {
+      CRUDUser.createUser(conn, String(user.username), String(user.password), String (user.bio), String (user.avatar), function(res) {
+        console.log(res)
+      })
+    });
+
+    // Recuperer un utilisateur
+    socket.on('getUser', user => {
+      CRUDUser.connectUser(conn, String(user.username), String(user.password), function(res) {
+        console.log(res);
+      });
+    });
     
 
   });
