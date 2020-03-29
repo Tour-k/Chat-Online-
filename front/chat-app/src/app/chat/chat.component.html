@@ -2,7 +2,7 @@
   <h2>New Channel</h2>
 
   <div fxLayout="column" fxLayoutAlign="|start,center,end,space-around,space-between| |start,center,end,stretch|" fxLayoutGap="gappx">
-    <form class="example-form" (ngSubmit)="onSubmit(f)" #f="ngForm" fx>
+    <form (ngSubmit)="onSubmit(f)" #f="ngForm" fx>
       <mat-form-field class="example-full-width">
         <mat-label>Add a new Room</mat-label>
         <input matInput placeholder="Ex. Pizza" id="roomName" name="roomName" ngModel required>
