@@ -17,6 +17,8 @@ import { FourOhFourComponent } from './four-oh-four/four-oh-four.component';
 import { RoomListComponent } from './room-list/room-list.component';
 import { Room } from 'src/models/room';
 import { MessageComponent } from './message/message.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatInputModule} from '@angular/material/input';
 
 const config : SocketIoConfig = {  url: 'http://localhost:8988', options: {} };
 
@@ -38,8 +40,10 @@ const config : SocketIoConfig = {  url: 'http://localhost:8988', options: {} };
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    MatInputModule,
+    SocketIoModule.forRoot(config),
 
-    SocketIoModule.forRoot(config)
+    BrowserAnimationsModule
   ],
   providers: [ChatService, Room],
   bootstrap: [AppComponent]
