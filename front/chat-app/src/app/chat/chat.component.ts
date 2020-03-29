@@ -16,8 +16,11 @@ export class ChatComponent implements OnInit {
   }
 
   onSubmit(form: NgForm) {
+    
     const roomName = form.value['roomName'];
     console.log(roomName);
     this.chatService.addRoom(roomName);
+    form.reset();
+
   }
 }

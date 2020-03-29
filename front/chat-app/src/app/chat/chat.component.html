@@ -1,11 +1,18 @@
 <h2>Formulaire Channel</h2>
 
-<form (ngSubmit)="onSubmit(f)" #f="ngForm">
+<!-- <form (ngSubmit)="onSubmit(f)" #f="ngForm">
     <label for="roomName">Room name</label>
     <input type="text" id="roomName" name="roomName" ngModel required>
     <button type="submit" [disabled]="f.invalid">
         Save
     </button>
+</form> -->
+
+<form class="example-form" (ngSubmit)="onSubmit(f)" #f="ngForm">
+  <mat-form-field class="example-full-width">
+    <mat-label>Add a new Room</mat-label>
+    <input matInput placeholder="Ex. Pizza" id="roomName" name="roomName" ngModel required>
+  </mat-form-field>
 </form>
 
 
