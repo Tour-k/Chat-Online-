@@ -1,24 +1,35 @@
-<h2>Formulaire Channel</h2>
+<div id='room' fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="gappx">
+  <h2>New Channel</h2>
 
-<!-- <form (ngSubmit)="onSubmit(f)" #f="ngForm">
-    <label for="roomName">Room name</label>
-    <input type="text" id="roomName" name="roomName" ngModel required>
-    <button type="submit" [disabled]="f.invalid">
-        Save
-    </button>
-</form> -->
+  <div fxLayout="column" fxLayoutAlign="|start,center,end,space-around,space-between| |start,center,end,stretch|" fxLayoutGap="gappx">
+    <form class="example-form" (ngSubmit)="onSubmit(f)" #f="ngForm" fx>
+      <mat-form-field class="example-full-width">
+        <mat-label>Add a new Room</mat-label>
+        <input matInput placeholder="Ex. Pizza" id="roomName" name="roomName" ngModel required>
+      </mat-form-field>
 
-<form class="example-form" (ngSubmit)="onSubmit(f)" #f="ngForm">
-  <mat-form-field class="example-full-width">
-    <mat-label>Add a new Room</mat-label>
-    <input matInput placeholder="Ex. Pizza" id="roomName" name="roomName" ngModel required>
-  </mat-form-field>
-</form>
+      <div>
+        <button type = 'submit' mat-raised-button  color="primary" [disabled]='f.invalid'>ok</button>
+      </div>
+      
+    </form>
+  </div>
 
+  <div fxLayout="column" fxLayoutAlign="|start,center,end,space-around,space-between| |start,center,end,stretch|" fxLayoutGap="gappx">
+    <app-room-list></app-room-list>
+  </div> 
+  
+</div>
 
-<app-room-list></app-room-list>
+<mat-divider
+  [vertical]="true">
+</mat-divider> 
 
-<app-message></app-message>
+<div id='chat' fxFlex="50%" fxFlexAlign="start">
+  <app-message></app-message>
+  
+</div>
+
 
 
 
