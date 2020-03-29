@@ -19,6 +19,14 @@ import { Room } from 'src/models/room';
 import { MessageComponent } from './message/message.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatInputModule} from '@angular/material/input';
+import {MatButtonModule} from '@angular/material/button';
+import {MatListModule} from '@angular/material/list';
+import {MatDividerModule} from '@angular/material/divider';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import {MatIconModule} from '@angular/material/icon';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+
+
 
 const config : SocketIoConfig = {  url: 'http://localhost:8988', options: {} };
 
@@ -42,8 +50,13 @@ const config : SocketIoConfig = {  url: 'http://localhost:8988', options: {} };
     FormsModule,
     MatInputModule,
     SocketIoModule.forRoot(config),
-
-    BrowserAnimationsModule
+    MatButtonModule,
+    MatListModule,
+    MatDividerModule,
+    FlexLayoutModule,
+    MatIconModule,
+    BrowserAnimationsModule,
+    FontAwesomeModule
   ],
   providers: [ChatService, Room],
   bootstrap: [AppComponent]

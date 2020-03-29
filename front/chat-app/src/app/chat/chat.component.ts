@@ -10,6 +10,7 @@ import { ChatService } from '../services/chat.service';
 })
 export class ChatComponent implements OnInit {
 
+  
   constructor(private chatService : ChatService) { }
 
   ngOnInit(): void {
