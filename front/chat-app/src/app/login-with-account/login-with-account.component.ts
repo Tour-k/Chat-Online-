@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {UserService} from '../services/user.service';
 import {NgForm} from '@angular/forms';
-import { Router } from '@angular/router';
-import {Observable} from 'rxjs';
+import { Router, ActivatedRoute } from '@angular/router';
+import {Observable, Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-login-with-account',
@@ -12,16 +12,28 @@ import {Observable} from 'rxjs';
 export class LoginWithAccountComponent implements OnInit {
 
   testLoginRes: Observable<object>;
+  
+  registred = false ; 
+  currentUsername : string;
+  currentUsernameSubscription : Subscription;
 
   constructor(private userService: UserService, private router: Router) { }
 
   ngOnInit(): void {
     this.testLoginRes = this.userService.testLoginRes;
+
+    this.currentUsernameSubscription = this.userService.currentUser.subscribe((user)=>{
+      this.currentUsername = user.username;
+      this.registred = true;
+      console.log(this.currentUsername);
+      if (this.registred){
+        this.router.navigate(['chat/' + this.currentUsername]);
+      }
+    })
   }
 
   onConnexion(form: NgForm) {
     this.userService.login(form.value);
-    /*this.router.navigateByUrl('/chat');*/
   }
 
   toString() {

@@ -33,6 +33,14 @@ conn.connect(function(err) {
   //Socket.io
   // ___________________________________
   io.on("connection", socket => {
+
+
+    // ___________________________________
+    // Récupérer les rooms à la connection 
+    // ___________________________________
+    CRUDChannel.getAllChannels(conn, (res)=>{
+      io.emit("rooms", res);
+    })
     
     let previousId;
     const safeJoin = currentId => {
@@ -41,6 +49,13 @@ conn.connect(function(err) {
       console.log('joined to currenrId : '+currentId)
       previousId = currentId;
     };
+
+
+    socket.on('getAllRooms', ()=>{
+      CRUDChannel.getAllChannels(conn, (res)=>{
+        io.emit("rooms", res);
+      })
+    })
 
     // ___________________________________
     //récupération les messages d'un channel
@@ -111,12 +126,7 @@ conn.connect(function(err) {
       })
     });
 
-    // ___________________________________
-    // Récupérer les rooms à la connection 
-    // ___________________________________
-    CRUDChannel.getAllChannels(conn, (res)=>{
-      io.emit("rooms", res);
-    })
+    
 
 
     // Creer un utilisateur
@@ -139,23 +149,35 @@ conn.connect(function(err) {
 
     // Recuperer un utilisateur
     socket.on('getUser', user => {
-      CRUDUser.getUserByUsername(conn, String(user.username),  function(res) {
-        if(res !== undefined) {
-          bcrypt.compare(user.password, res[0].password, (err, res) => {
-            if (err) {
-              console.error(err)
-              return
+      CRUDUser.verifyUserByUsername(conn, String(user.username), res => {
+        console.log('VERIFY user : '+res)
+        if(res){
+          CRUDUser.getUserByUsername(conn, String(user.username),  function(res) {
+            if(res !== undefined) {
+              bcrypt.compare(user.password, res[0].password, (err, res) => {
+                if (err) {
+                  console.error(err)
+                  return 
+                }
+                // console.log(res);
+                socket.emit("testLoginRes", res) //true or false
+              })
             }
-            console.log(res);
-            io.emit("testLoginRes", res) //true or false
+            console.log(res[0] + " GET USER");
+            socket.emit('user', res[0]);
+            // console.log(res[0].password);
           })
+        } else {
+          // TODO : retourner une valeur quand le user n'est pas enregistré dans la base 
         }
-        console.log(res[0].password);
-      });
+      })
+      
     });
     
 
   });
+
+    
 
   // ___________________________________
   // retour connexion Socket

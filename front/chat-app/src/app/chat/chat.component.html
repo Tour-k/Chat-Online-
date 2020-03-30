@@ -16,7 +16,9 @@
       </form>
     </div>
   
-    
+    <p>
+      Vous Etes connectez en tant que : {{ username }}
+    </p>
     <app-room-list></app-room-list> 
   </div>
 
@@ -25,12 +27,15 @@
 
 <mat-divider
   [vertical]="true">
+  
 </mat-divider> 
+
 
 <div id='colone-chat' fxFlex="80%">
   <div class='chat' fxLayout="column" fxLayoutAlign="space-between start" fxLayoutGap="gappx">
+    
     <app-message ></app-message>
-
+  
     <app-box-input-message></app-box-input-message>
   </div>
 

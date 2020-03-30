@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm} from '@angular/forms';
 import { ChatService } from '../services/chat.service';
+import { ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -10,9 +11,12 @@ import { ChatService } from '../services/chat.service';
 })
 export class ChatComponent implements OnInit {
 
-  constructor(private chatService: ChatService) { }
+  username : string;
+
+  constructor(private chatService: ChatService, private route : ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.username = this.route.snapshot.params['username'];
   }
 
   onSubmit(form: NgForm) {

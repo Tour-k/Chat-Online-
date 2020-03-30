@@ -3,6 +3,7 @@ import { NgForm} from '@angular/forms';
 import { ChatService } from '../services/chat.service';
 import { Room } from 'src/models/room';
 import { Observable, Subscription } from 'rxjs';
+import { UserService } from '../services/user.service';
  
 @Component({
   selector: 'app-box-input-message',
@@ -12,16 +13,19 @@ import { Observable, Subscription } from 'rxjs';
 export class BoxInputMessageComponent implements OnInit, OnDestroy {
 
   
-  roomName : string 
-  currentRoomSubscription : Subscription;
+  
+  
   registred = false;
 
   Channel_id : number;
+  roomName : string ;
+  currentRoomSubscription : Subscription;
 
-  // TODO : Ajouter logique pour récupérer le User ID  
-  User_id : number; 
+  username : string; 
+  userId : number;
+  currentUserSubscription : Subscription;
 
-  constructor(private chatService : ChatService) { }
+  constructor(private chatService : ChatService, private userService : UserService) { }
 
   
 
@@ -31,17 +35,24 @@ export class BoxInputMessageComponent implements OnInit, OnDestroy {
       this.Channel_id = room.id;
       this.roomName = room.nom;
     });
+
+    this.currentUserSubscription = this.userService.currentUser.subscribe((user)=>{
+      this.username = user.username;
+      this.userId = user.id;
+      console.log(this.username + 'Current username');
+    })
+
   }
 
   ngOnDestroy(): void {
-    this.currentRoomSubscription.unsubscribe()
+    this.currentRoomSubscription.unsubscribe();
+    this.currentUserSubscription.unsubscribe();
   }
 
   onSubmit(form: NgForm){
-    //TODO : récupérer le USER ID 
-    this.User_id = 1;
+    
     const message = form.value['msg'];
-    this.chatService.sendMessage(this.Channel_id, this.User_id , message );
+    this.chatService.sendMessage(this.Channel_id, this.userId , message );
     form.reset();
 
   }
