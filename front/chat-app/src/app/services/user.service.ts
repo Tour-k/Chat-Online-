@@ -4,6 +4,7 @@ import { Socket } from 'ngx-socket-io';
 @Injectable()
 export class UserService {
 
+  testLoginRes = this.socket.fromEvent<any>('testLoginRes');
 
   constructor(private socket: Socket) {}
 
@@ -14,4 +15,6 @@ export class UserService {
   login(values) {
     this.socket.emit('getUser', values);
   }
+
+
 }
