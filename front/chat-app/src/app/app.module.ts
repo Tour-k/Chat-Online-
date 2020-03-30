@@ -11,7 +11,6 @@ import { ChatService } from './services/chat.service';
 import { AccueilComponent } from './accueil/accueil.component';
 import { LoginWithAccountComponent } from './login-with-account/login-with-account.component';
 import { CreateAccountComponent } from './create-account/create-account.component';
-import { ChannelComponent } from './channel/channel.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { FourOhFourComponent } from './four-oh-four/four-oh-four.component';
 import { RoomListComponent } from './room-list/room-list.component';
@@ -29,7 +28,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatListModule } from '@angular/material/list';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
-import { MatCardModule } from "@angular/material/card";
+import { MatCardModule } from '@angular/material/card';
 
 
 const config: SocketIoConfig = {  url: 'http://localhost:8988', options: {} };
@@ -40,7 +39,6 @@ const config: SocketIoConfig = {  url: 'http://localhost:8988', options: {} };
     AccueilComponent,
     LoginWithAccountComponent,
     CreateAccountComponent,
-    ChannelComponent,
     UserProfileComponent,
     FourOhFourComponent,
     AppComponent,
