@@ -12,18 +12,25 @@ import { Observable, Subscription } from 'rxjs';
 export class BoxInputMessageComponent implements OnInit, OnDestroy {
 
   
-  currentRoom : Observable<object>;
+  roomName : string 
   currentRoomSubscription : Subscription;
   registred = false;
 
+  Channel_id : number;
+
+  // TODO : Ajouter logique pour récupérer le User ID  
+  User_id : number; 
 
   constructor(private chatService : ChatService) { }
 
   
 
   ngOnInit(): void {
-    this.currentRoom = this.chatService.currentRoom;
-    this.currentRoomSubscription = this.currentRoom.subscribe(() => this.registred = true);
+    this.currentRoomSubscription = this.chatService.currentRoom.subscribe((room) => {
+      this.registred = true;
+      this.Channel_id = room.id;
+      this.roomName = room.nom;
+    });
   }
 
   ngOnDestroy(): void {
@@ -31,8 +38,10 @@ export class BoxInputMessageComponent implements OnInit, OnDestroy {
   }
 
   onSubmit(form: NgForm){
+    //TODO : récupérer le USER ID 
+    this.User_id = 1;
     const message = form.value['msg'];
-    this.chatService.sendMessage(message);
+    this.chatService.sendMessage(this.Channel_id, this.User_id , message );
     form.reset();
 
   }

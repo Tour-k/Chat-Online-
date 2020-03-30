@@ -15,8 +15,8 @@ export class MessageComponent implements OnInit, OnDestroy {
   messages : Observable<object>;
   messagesSubscription : Subscription;
   
-  room : Observable<object>;
-  roomSubscription : Subscription;
+  currentRoom :string ;
+  private _roomSub : Subscription;
 
   registred = false ;
 
@@ -28,13 +28,15 @@ export class MessageComponent implements OnInit, OnDestroy {
     this.messages = this.chatServie.messages;
     this.messagesSubscription = this.messages.subscribe();
     
-    this.room = this.chatServie.currentRoom;
-    this.roomSubscription = this.room.subscribe(()=> this.registred = true);
+    this._roomSub = this.chatServie.currentRoom.subscribe((room) =>{
+      this.currentRoom = room.nom;
+      this.registred = true;
+    });
   }
 
   ngOnDestroy(){
     this.messagesSubscription.unsubscribe();
-    this.roomSubscription.unsubscribe();
+    this._roomSub.unsubscribe();
   }
 
 }

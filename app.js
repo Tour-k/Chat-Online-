@@ -48,12 +48,12 @@ conn.connect(function(err) {
     socket.on("getRoom", roomId => {
       safeJoin(roomId);
       CRUDChannel.getChannelById(conn, roomId, res=>{
-        socket.emit('room', res[0]);
-        console.log( res[0] + " : en faisant un GET");
+        socket.emit('room', res[0])
+        console.log( res[0] + " : en faisant un GET")
       })
       CRUDMessage.getAllMessagesByChannelId(conn, roomId, (res)=>{
-        socket.emit("messages", res); // initiating client only
-        console.log(res + ': messages !!');
+        socket.emit("messages", res) // initiating client only
+        console.log( res + ': messages !!')
       })   
     });
 
@@ -95,11 +95,20 @@ conn.connect(function(err) {
     })
   });
 
-  
-    //Envoyer un message
-    socket.on("message", msg => {
-      rooms[msg.id] = msg;
-      socket.to(msg.id).emit("rooms", msg); // emit to only the clients that are currently viewing that document
+    // ___________________________________
+    // ADD message
+    // ___________________________________
+    socket.on("addMessage", dataArray => {
+      CRUDMessage.createMessage(conn, dataArray[0], dataArray[1], dataArray[2], res=>{
+        console.log(dataArray[2] + ' : message enregistré');
+      })
+      CRUDMessage.getAllMessagesByChannelId(conn, dataArray[0], (res)=>{
+        socket.emit("messages", res);
+        io.to(dataArray[0]).emit('messages', res);
+
+        
+        console.log( res + ': messages !!')
+      })
     });
 
     // ___________________________________
