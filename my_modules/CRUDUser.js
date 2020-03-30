@@ -23,9 +23,10 @@ var getAllUsers = function(conn, callback) {
 // GET USER BY USERNAME (test OK)
 // ___________________________________
 var getUserByUsername = function(conn, username, callback){
-    conn.query("SELECT * FROM User WHERE username =" + username, 
+    conn.query("SELECT * FROM User WHERE username = '"+username+"'",
     function (err, result, fields) {
         if (err) throw err;
+        console.log(result);
         callback(result);
     });
 }
@@ -53,20 +54,6 @@ var createUser = function(conn, username, password, bio='', avatar='', callback)
         callback(msgSuccess);
     });
 }
-
-// ___________________________________
-// CONNECT USER
-// ___________________________________
-
-var connectUser = function(conn, username, password, callback){
-    var sql = "SELECT * from user WHERE username='"+username+"' AND password='"+password+"' ";
-    conn.query(sql, function (err, result) {
-        if (err) throw err;
-        msgSuccess = username + " : connected with success"
-        callback(msgSuccess);
-    });
-}
-
 
 // ___________________________________
 // UPDATE USER BIO (test OK)
@@ -99,7 +86,6 @@ exports.deleteUser = deleteUser;
 exports.createUser = createUser;
 exports.updateUserBio = updateUserBio;
 exports.updateUserAvatar = updateUserAvatar;
-exports.connectUser = connectUser;
 
 
 

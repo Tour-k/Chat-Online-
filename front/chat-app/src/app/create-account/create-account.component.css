@@ -1,0 +1,39 @@
+
+
+.card {
+  padding: 0;
+  margin: 10% auto 0;
+  width: 100%;
+  max-width: 500px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  height: 64px;
+  box-sizing: border-box;
+  border-bottom: solid 1px rgba(0, 0, 0, 0.12);
+  color: rgba(0, 0, 0, 0.6);
+  margin-bottom: 15px;
+}
+
+.title {
+  margin-right: auto;
+  font-weight: 400;
+}
+
+.form {
+  max-width: 500px;
+  width: 80%;
+}
+
+.field-full-width {
+  width: 100%;
+  padding-left: 10%;
+
+}
+
+.btn-action {
+  margin-bottom: 15px;
+  margin-right: 15px;
+}

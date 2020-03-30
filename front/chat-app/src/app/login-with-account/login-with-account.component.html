@@ -1,4 +1,4 @@
-<html>
+<!--
 <div>
   <a routerLink="/create-account"> Créer un compte</a>
   <a routerLink="/accueil"> Connexion </a>
@@ -22,4 +22,33 @@
     </div>
   </div>
 </div>
-</html>
+-->
+
+<div class="login-wrapper" fxLayout="row" fxLayoutAlign="center center">
+  <mat-card class="card box">
+    <mat-card-header class="header">
+      <mat-card-title class="title">Login Form : </mat-card-title>
+    </mat-card-header>
+
+    <form class="form" (ngSubmit)="onConnexion(f)" #f="ngForm" >
+
+      <mat-card-content class="content">
+        <mat-form-field class="field-full-width">
+          <mat-label for="username">Username</mat-label>
+          <input type="text" id="username" name="username" ngModel matInput placeholder="Username">
+        </mat-form-field>
+        <mat-form-field class="field-full-width">
+          <mat-label for="password">Password</mat-label>
+          <input type="password" id="password"  name="password" ngModel matInput placeholder="Password">
+        </mat-form-field>
+      </mat-card-content>
+      <div fxLayoutAlign="end center" class="btn-action">
+        <button mat-stroked-button color="primary" class="btn-block">Log In  {{ testLoginRes[0] }}</button>
+      </div>
+
+      <div fxLayoutAlign="end center" class="btn-action">
+        <button mat-stroked-button (click)="toString()" color="accent" class="btn-block">test</button>
+      </div>
+    </form>
+  </mat-card>
+</div>

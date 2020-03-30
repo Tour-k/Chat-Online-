@@ -9,7 +9,7 @@ export class ChatService {
     currentRoom = this.socket.fromEvent<object>('room');
     rooms = this.socket.fromEvent<any>('rooms');
 
-    messages = this.socket.fromEvent<any>('messages')
+    messages = this.socket.fromEvent<any>('messages');
 
 
     constructor(private socket: Socket) {}

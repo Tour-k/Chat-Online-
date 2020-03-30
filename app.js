@@ -1,6 +1,8 @@
 const app = require('express')();
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
+const bcrypt = require('bcrypt');
+
 var CRUDUser = require('./my_modules/CRUDUser');
 var CRUDChannel = require('./my_modules/CRUDChannel');
 var CRUDMessage = require('./my_modules/CRUDMessage');
@@ -110,15 +112,36 @@ conn.connect(function(err) {
 
     // Creer un utilisateur
     socket.on('newUser', user => {
-      CRUDUser.createUser(conn, String(user.username), String(user.password), String (user.bio), String (user.avatar), function(res) {
-        console.log(res)
+      const rounds = 8;
+
+      bcrypt.hash(user.password, rounds, (err, hashPassword) => {
+        if (err) {
+          console.error(err)
+          return
+        }
+        console.log(hashPassword);
+        CRUDUser.createUser(conn, String(user.username), String(hashPassword), String (user.bio), String (user.avatar), function(res) {
+          console.log(res)
+        })
       })
+
+
     });
 
     // Recuperer un utilisateur
     socket.on('getUser', user => {
-      CRUDUser.connectUser(conn, String(user.username), String(user.password), function(res) {
-        console.log(res);
+      CRUDUser.getUserByUsername(conn, String(user.username),  function(res) {
+        if(res !== undefined) {
+          bcrypt.compare(user.password, res[0].password, (err, res) => {
+            if (err) {
+              console.error(err)
+              return
+            }
+            console.log(res);
+            io.emit("testLoginRes", res) //true or false
+          })
+        }
+        console.log(res[0].password);
       });
     });
     
