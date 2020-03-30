@@ -2,8 +2,7 @@
 
     <!-- <h2 *ngFor='let currentRoom of room | async'> {{currentRoom.nom}}</h2> -->
     <h2> {{currentRoom}} </h2>
-    
-    
+
     <mat-list>
         <mat-list-item  *ngFor='let msg of messages | async'> {{ msg.message }} </mat-list-item>
     </mat-list>

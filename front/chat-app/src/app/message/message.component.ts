@@ -12,31 +12,26 @@ import { map } from 'rxjs/operators';
 })
 export class MessageComponent implements OnInit, OnDestroy {
 
-  messages : Observable<object>;
-  messagesSubscription : Subscription;
-  
-  currentRoom :string ;
-  private _roomSub : Subscription;
+  messages: Observable<object>;
+  messagesSubscription: Subscription;
+  currentRoom: string ;
+  private _roomSub: Subscription;
 
   registred = false ;
 
-  constructor(private chatServie : ChatService) { }
-
-  
+  constructor(private chatServie: ChatService) { }
 
   ngOnInit(): void {
     this.messages = this.chatServie.messages;
     this.messagesSubscription = this.messages.subscribe();
-    
-    this._roomSub = this.chatServie.currentRoom.subscribe((room) =>{
+    this._roomSub = this.chatServie.currentRoom.subscribe((room) => {
       this.currentRoom = room.nom;
       this.registred = true;
     });
   }
 
-  ngOnDestroy(){
+  ngOnDestroy() {
     this.messagesSubscription.unsubscribe();
     this._roomSub.unsubscribe();
   }
-
 }
