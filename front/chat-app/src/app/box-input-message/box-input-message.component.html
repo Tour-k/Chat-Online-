@@ -1,0 +1,13 @@
+<form id="message-form" (ngSubmit)="onSubmit(f)" #f="ngForm" *ngIf="registred">
+            
+    <div fxLayout="row" fxLayoutAlign="space-between start">
+
+        <mat-form-field>
+            <mat-label>Envoyer un message : </mat-label>
+            <input matInput  id="msg" name="msg" ngModel required>
+        </mat-form-field>
+     
+        <button type = 'submit' mat-raised-button  color="primary" [disabled]='f.invalid'>Envoyer</button>
+    </div>
+       
+</form>  

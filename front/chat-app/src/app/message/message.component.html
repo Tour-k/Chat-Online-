@@ -1,18 +1,15 @@
-<h2>Messages</h2>
+<div id='container-message' fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="gappx" *ngIf='registred'>
+
+    <h2 *ngFor='let currentRoom of room | async'> {{currentRoom.nom}}</h2>
+    <!-- <h2> {{room.nom}}</h2> -->
+    
+    
+    <mat-list>
+        <mat-list-item  *ngFor='let msg of messages | async'> {{ msg.message }} </mat-list-item>
+    </mat-list>
+
+</div>
 
 
 
-<mat-list>
-    <mat-list-item  *ngFor='let msg of messages | async'> {{ msg.message }} </mat-list-item>
-</mat-list>
 
-
-<form id="message-form" (ngSubmit)="onSubmit(f)" #f="ngForm">
-        <mat-form-field class="example-full-width">
-            <mat-label>Envoyer un message : </mat-label>
-            <input matInput placeholder="Ex. Pizza" id="roomName" name="roomName" ngModel required>
-        </mat-form-field>
-        
-            
-        <button type = 'submit' mat-raised-button  color="primary" [disabled]='f.invalid'>ok</button>   
-</form>

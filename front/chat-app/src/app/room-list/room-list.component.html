@@ -1,7 +1,6 @@
 <mat-list>
     <mat-list-item (click)='loadRoom(room.id)' *ngFor='let room of rooms | async'> 
         
-        <!-- <button (click)='deleteRoom(room.id)'>supprimer</button> -->
         <fa-icon (click)='deleteRoom(room.id)' [icon]="faTrash"> </fa-icon>
         <div id="room-list">
             {{ room.nom }}

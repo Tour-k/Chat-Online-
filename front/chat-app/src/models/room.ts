@@ -1,6 +1,6 @@
 export class Room {
     id : number;
-    name : string;
+    nom : string;
     userId : number;
 
 }

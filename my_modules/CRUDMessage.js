@@ -17,7 +17,8 @@ var deleteAllMessageByChannelId = function(conn, channelId, callback){
     conn.query(sql, function (err, result) {
     if (err) throw err;
     messageSuccess = "Tous les messages du channel ont été supprimé !";
-    callback(messageSuccess);
+    console.log(messageSuccess);
+    callback(result);
 });
 }
 

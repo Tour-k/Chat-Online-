@@ -26,6 +26,7 @@ import {MatDividerModule} from '@angular/material/divider';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import {MatIconModule} from '@angular/material/icon';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { BoxInputMessageComponent } from './box-input-message/box-input-message.component';
 
 
 
@@ -43,7 +44,8 @@ const config: SocketIoConfig = {  url: 'http://localhost:8988', options: {} };
     AppComponent,
     ChatComponent,
     RoomListComponent,
-    MessageComponent
+    MessageComponent,
+    BoxInputMessageComponent
   ],
   imports: [
     BrowserModule,
