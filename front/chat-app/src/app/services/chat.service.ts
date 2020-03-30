@@ -1,12 +1,19 @@
 import { Injectable } from '@angular/core';
 import { Socket } from 'ngx-socket-io';
 import { Room } from 'src/models/room';
-// import { map } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
+
+// import { fromEvent } from 'rxjs'
+// import { Room } from 'src/models/room';
+
 
 @Injectable()
 export class ChatService {
 
-    currentRoom = this.socket.fromEvent<Room>('room');
+
+    currentRoom = this.socket.fromEvent<Room>('room'); 
+
     rooms = this.socket.fromEvent<any>('rooms');
 
     messages = this.socket.fromEvent<any>('messages');
@@ -20,10 +27,10 @@ export class ChatService {
     addRoom(roomName: string){
         const roomObject = {
             id: null,
-            name: '',
+            nom: '',
             userId: 1 //ON EST EN DUR ICI POUR LE TEST VERS LA BDD
         };
-        roomObject.name = roomName;
+        roomObject.nom = roomName;
         this.socket.emit('addRoom' , roomObject);
     }
 
@@ -35,8 +42,8 @@ export class ChatService {
         this.socket.emit('getRoom', roomId);
     }
 
-    sendMessage(msg: string) {
-        this.socket.emit('message', msg);
+    sendMessage(Channel_id, User_id, msg: string) {
+        this.socket.emit('addMessage', [Channel_id, User_id, msg]);
     }
 
     // getMessage(){

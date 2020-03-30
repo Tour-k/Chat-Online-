@@ -1,34 +1,49 @@
-<div id='room' fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="gappx">
-  <h2>New Channel</h2>
-
-  <div fxLayout="column" fxLayoutAlign="|start,center,end,space-around,space-between| |start,center,end,stretch|" fxLayoutGap="gappx">
-    <form (ngSubmit)="onSubmit(f)" #f="ngForm" fx>
-      <mat-form-field class="example-full-width">
-        <mat-label>Add a new Room</mat-label>
-        <input matInput placeholder="Ex. Pizza" id="roomName" name="roomName" ngModel required>
-      </mat-form-field>
-
-      <div>
-        <button type = 'submit' mat-raised-button  color="primary" [disabled]='f.invalid'>ok</button>
-      </div>
-      
-    </form>
+<!-- <div fxFlex="%"> -->
+  <div id='room' fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="gappx">
+    <h2>New Channel</h2>
+  
+    <div fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="gappx">
+      <form (ngSubmit)="onSubmit(f)" #f="ngForm" fx>
+        <mat-form-field class="example-full-width">
+          <mat-label>Add a new Room</mat-label>
+          <input matInput placeholder="Ex. Pizza" id="roomName" name="roomName" ngModel required>
+        </mat-form-field>
+  
+        <div>
+          <button type = 'submit' mat-raised-button  color="primary" [disabled]='f.invalid'>ok</button>
+        </div>
+        
+      </form>
+    </div>
+  
+    <p>
+      Vous Etes connectez en tant que : {{ username }}
+    </p>
+    <app-room-list></app-room-list> 
   </div>
 
-  <div fxLayout="column" fxLayoutAlign="|start,center,end,space-around,space-between| |start,center,end,stretch|" fxLayoutGap="gappx">
-    <app-room-list></app-room-list>
-  </div> 
-  
-</div>
+<!-- </div> -->
+
 
 <mat-divider
   [vertical]="true">
+  
 </mat-divider> 
 
-<div id='chat' fxFlex="50%" fxFlexAlign="start">
-  <app-message></app-message>
+
+<div id='colone-chat' fxFlex="80%">
+  <div class='chat' fxLayout="column" fxLayoutAlign="space-between start" fxLayoutGap="gappx">
+    
+    <app-message ></app-message>
+  
+    <app-box-input-message></app-box-input-message>
+  </div>
+
+
   
 </div>
+
+
 
 
 

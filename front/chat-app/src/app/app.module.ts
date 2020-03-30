@@ -22,6 +22,7 @@ import {UserService} from './services/user.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { BoxInputMessageComponent } from './box-input-message/box-input-message.component';
 
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
@@ -44,7 +45,8 @@ const config: SocketIoConfig = {  url: 'http://localhost:8988', options: {} };
     AppComponent,
     ChatComponent,
     RoomListComponent,
-    MessageComponent
+    MessageComponent,
+    BoxInputMessageComponent
   ],
   imports: [
     BrowserModule,
