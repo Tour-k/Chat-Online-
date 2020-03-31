@@ -23,6 +23,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { BoxInputMessageComponent } from './box-input-message/box-input-message.component';
+import { ScrollingModule } from '@angular/cdk/scrolling';
+import { CookieService } from 'ngx-cookie-service';
 
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
@@ -30,7 +32,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
-import {ScrollingModule} from '@angular/cdk/scrolling';
+
 
 
 const config: SocketIoConfig = {  url: 'http://localhost:8988', options: {} };
@@ -65,7 +67,7 @@ const config: SocketIoConfig = {  url: 'http://localhost:8988', options: {} };
     MatCardModule,
     ScrollingModule
   ],
-  providers: [ChatService, Room, UserService],
+  providers: [CookieService, ChatService, Room, UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

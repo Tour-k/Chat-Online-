@@ -11,7 +11,7 @@ import { ChatComponent } from './chat/chat.component';
 
 const routes: Routes = [
   {path: '', component: LoginWithAccountComponent},
-  {path: 'accueil', component: AccueilComponent},
+  {path: 'home', component: AccueilComponent},
   {path: 'chat', component: ChatComponent},
   {path: 'register', component: CreateAccountComponent},
   {path: 'user-profile', component: UserProfileComponent},

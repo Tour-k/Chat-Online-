@@ -3,6 +3,7 @@ import {UserService} from '../services/user.service';
 import {NgForm} from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import {Observable, Subscription} from 'rxjs';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-login-with-account',
@@ -11,27 +12,31 @@ import {Observable, Subscription} from 'rxjs';
 })
 export class LoginWithAccountComponent implements OnInit, OnDestroy {
 
-  testLoginRes: Observable<object>;
-  
-  registred = false ; 
-  currentUsername : string;
-  currentUsernameSubscription : Subscription;
+  private cookieValue: string;
 
-  constructor(private userService: UserService, private router: Router) { }
+  testLoginRes: Observable<object>;
+  registred = false ;
+  currentUsername: string;
+  currentUsernameSubscription: Subscription;
+
+  constructor(private userService: UserService, private router: Router, private cookieService: CookieService) { }
 
   ngOnInit(): void {
     this.testLoginRes = this.userService.testLoginRes;
 
-    this.currentUsernameSubscription = this.userService.currentUser.subscribe((user)=>{
+    this.currentUsernameSubscription = this.userService.currentUser.subscribe((user) => {
+      this.cookieService.set('userName', user.username);
+      this.cookieService.set('userId', user.id.toString());
+
       this.currentUsername = user.username;
       this.registred = true;
       console.log(this.currentUsername);
       if (this.registred){
         this.userService.setCurrentUserId(user.id);
         this.userService.setCurrentUserName(user.username);
-        this.router.navigate(['chat']); 
+        this.router.navigate(['chat']);
       }
-    })
+    });
   }
 
   ngOnDestroy(): void {
@@ -42,7 +47,11 @@ export class LoginWithAccountComponent implements OnInit, OnDestroy {
     this.userService.login(form.value);
   }
 
-  toString() {
-    alert(JSON.stringify(this.testLoginRes));
+  toSignUp() {
+    this.router.navigateByUrl('register');
+  }
+
+  toHome() {
+    this.router.navigateByUrl('home');
   }
 }
