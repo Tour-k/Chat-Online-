@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Socket } from 'ngx-socket-io';
 import { User } from 'src/models/user';
 import { Subscription } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class UserService {
@@ -17,8 +18,8 @@ export class UserService {
   currentUserName: string;
   currentUserId: number;
 
-  constructor(private socket: Socket) {
-    this.testLoginSubscription = this.testLoginRes.subscribe((res) => {this.registred = res;});
+  constructor(private socket: Socket, private router : Router) {
+    this.testLoginSubscription = this.testLoginRes.subscribe((res) => {this.registred = res; this.router.navigate(['chat']);});
   }
 
   register(values: any) {

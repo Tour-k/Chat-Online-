@@ -29,13 +29,12 @@ export class LoginWithAccountComponent implements OnInit, OnDestroy {
       this.cookieService.set('userId', user.id.toString());
 
       this.currentUsername = user.username;
-      this.registred = true;
-      console.log(this.currentUsername);
-      if (this.registred) {
-        this.userService.setCurrentUserId(user.id);
-        this.userService.setCurrentUserName(user.username);
-        this.router.navigate(['chat']);
-      }
+      // TODO : utiliser le cookie plutôt... 
+      this.userService.setCurrentUserId(user.id);
+      this.userService.setCurrentUserName(user.username);
+
+      
+    
     });
   }
 
