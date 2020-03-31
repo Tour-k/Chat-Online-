@@ -15,8 +15,8 @@ export class UserService {
   currentUser = this.socket.fromEvent<User>('user');
   
   //TODO currentUserName  et  currentUserIdà supprimer => utilisation du cookie 
-  currentUserName: string;
-  currentUserId: number;
+  // currentUserName: string;
+  // currentUserId: number;
 
   constructor(private socket: Socket, private router : Router) {
     this.testLoginSubscription = this.testLoginRes.subscribe((res) => {this.registred = res; this.router.navigate(['chat']);});
@@ -36,12 +36,12 @@ export class UserService {
   }
 
   //TODO a supprimer 
-  setCurrentUserName(username) {
-    this.currentUserName = username ;
-  }
+  // setCurrentUserName(username) {
+  //   this.currentUserName = username ;
+  // }
   //TODO a supprimer 
-  setCurrentUserId(userid) {
-    this.currentUserId = userid ;
-  }
+  // setCurrentUserId(userid) {
+  //   this.currentUserId = userid ;
+  // }
 
 }

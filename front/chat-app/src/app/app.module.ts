@@ -25,6 +25,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { BoxInputMessageComponent } from './box-input-message/box-input-message.component';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { CookieService } from 'ngx-cookie-service';
+import { AvatarModule } from 'ngx-avatar';
+import { HTMLEscapeUnescapeModule } from 'html-escape-unescape';
 
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
@@ -33,6 +35,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 import { AuthGuard } from './services/auth-guard.service';
+
 
 
 
@@ -66,7 +69,9 @@ const config: SocketIoConfig = {  url: 'http://localhost:8988', options: {} };
     BrowserAnimationsModule,
     FontAwesomeModule,
     MatCardModule,
-    ScrollingModule
+    ScrollingModule,
+    AvatarModule,
+    HTMLEscapeUnescapeModule
   ],
   providers: [CookieService, ChatService, Room, UserService, AuthGuard],
   bootstrap: [AppComponent]

@@ -53,6 +53,9 @@ conn.connect(function(err) {
 
     socket.on('getAllRooms', ()=>{
       CRUDChannel.getAllChannels(conn, (res)=>{
+        res.forEach(element => {
+          element.nom = unescape(element.nom);
+        });
         io.emit("rooms", res);
         socket.emit('rooms', res);
       })
@@ -64,12 +67,19 @@ conn.connect(function(err) {
     socket.on("getRoom", roomId => {
       safeJoin(roomId);
       CRUDChannel.getChannelById(conn, roomId, res=>{
+        res.forEach(element => {
+          element.nom = unescape(element.nom);
+        });
         socket.emit('room', res[0])
-        console.log( res[0] + " : en faisant un GET")
+        // console.log( res[0] + " : en faisant un GET")
       })
       CRUDMessage.getAllMessagesByChannelId(conn, roomId, (res)=>{
+        res.forEach(element => {
+          element.message = unescape(element.message);
+        });
+        // console.log(JSON.stringify(res));
         socket.emit("messages", res) // initiating client only
-        console.log( res + ': messages !!')
+        // console.log( res + ': messages !!')
       })   
     });
 
@@ -78,7 +88,7 @@ conn.connect(function(err) {
     // ___________________________________
     socket.on("addRoom", room => {
       // safeJoin(room.id);
-      CRUDChannel.createChannel(conn, String(room.nom), parseInt(room.userId), function(res){
+      CRUDChannel.createChannel(conn, escape(String(room.nom)), parseInt(room.userId), function(res){
         console.log(res)
       })
       // CRUDChannel.getChannelById(conn, room.id, res=>{
@@ -87,6 +97,9 @@ conn.connect(function(err) {
       // }) 
 
       CRUDChannel.getAllChannels(conn, function(res){
+        res.forEach(element => {
+          element.nom = unescape(element.nom);
+        });
         rooms = res;
        
         io.emit("rooms", rooms); // emitting broadcast 
@@ -106,6 +119,9 @@ conn.connect(function(err) {
         console.log(res);
       })
       CRUDChannel.getAllChannels(conn, function(res){
+        res.forEach(element => {
+          element.nom = unescape(element.nom);
+        });
         rooms = res;
         io.emit("rooms", rooms);
       })
@@ -115,10 +131,13 @@ conn.connect(function(err) {
     // ADD message
     // ___________________________________
     socket.on("addMessage", dataArray => {
-      CRUDMessage.createMessage(conn, dataArray[0], dataArray[1], dataArray[2], res=>{
+      CRUDMessage.createMessage(conn, dataArray[0], dataArray[1], escape(dataArray[2]), res=>{
         console.log(dataArray[2] + ' : message enregistré');
       })
       CRUDMessage.getAllMessagesByChannelId(conn, dataArray[0], (res)=>{
+        res.forEach(element => {
+          element.message = unescape(element.message);
+        });
         socket.emit("messages", res);
         io.to(dataArray[0]).emit('messages', res);
 
