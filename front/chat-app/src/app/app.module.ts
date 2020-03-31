@@ -30,6 +30,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
+import {ScrollingModule} from '@angular/cdk/scrolling';
 
 
 const config: SocketIoConfig = {  url: 'http://localhost:8988', options: {} };
@@ -61,7 +62,8 @@ const config: SocketIoConfig = {  url: 'http://localhost:8988', options: {} };
     MatIconModule,
     BrowserAnimationsModule,
     FontAwesomeModule,
-    MatCardModule
+    MatCardModule,
+    ScrollingModule
   ],
   providers: [ChatService, Room, UserService],
   bootstrap: [AppComponent]

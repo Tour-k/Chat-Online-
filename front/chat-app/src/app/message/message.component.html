@@ -4,7 +4,17 @@
     <h2> {{currentRoom}} </h2>
 
     <mat-list>
-        <mat-list-item  *ngFor='let msg of messages | async'> {{ msg.message }} </mat-list-item>
+        <mat-list-item  *ngFor='let msg of messages | async'> 
+            <div fxLayout="column" fxLayoutAlign="start start">
+                <div>{{msg.username}}</div>
+                
+                <div>{{ msg.message }}</div> 
+            </div>
+        
+            <mat-divider>
+            </mat-divider>
+
+        </mat-list-item>
     </mat-list>
 
 </div>

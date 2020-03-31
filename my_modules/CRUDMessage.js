@@ -2,7 +2,7 @@
 // GET All Message By Channel Id (test OK)
 // ___________________________________
 var getAllMessagesByChannelId = function(conn, channelId, callback){
-    conn.query("SELECT * FROM Message WHERE Channel_id =" + channelId, 
+    conn.query("SELECT Message.id, Message.message, User.username FROM Message INNER JOIN User ON Message.User_id = User.id WHERE Channel_id =" + channelId ,
     function (err, result, fields) {
         if (err) throw err;
         callback(result);

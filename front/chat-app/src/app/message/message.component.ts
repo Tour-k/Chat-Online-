@@ -34,4 +34,5 @@ export class MessageComponent implements OnInit, OnDestroy {
     this.messagesSubscription.unsubscribe();
     this._roomSub.unsubscribe();
   }
+
 }

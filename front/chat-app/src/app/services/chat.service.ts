@@ -3,6 +3,7 @@ import { Socket } from 'ngx-socket-io';
 import { Room } from 'src/models/room';
 import { map } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
+import { UserService } from './user.service';
 
 // import { fromEvent } from 'rxjs'
 // import { Room } from 'src/models/room';
@@ -19,7 +20,7 @@ export class ChatService {
     messages = this.socket.fromEvent<any>('messages');
 
 
-    constructor(private socket: Socket) {}
+    constructor(private socket: Socket, private userService : UserService ) {}
 
     
 
@@ -30,6 +31,7 @@ export class ChatService {
             nom: '',
             userId: 1 //ON EST EN DUR ICI POUR LE TEST VERS LA BDD
         };
+        roomObject.userId = this.userService.currentUserId;
         roomObject.nom = roomName;
         this.socket.emit('addRoom' , roomObject);
     }
