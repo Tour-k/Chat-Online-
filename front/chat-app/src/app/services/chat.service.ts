@@ -46,6 +46,10 @@ export class ChatService {
         this.socket.emit('addMessage', [Channel_id, User_id, msg]);
     }
 
+    getAllRooms(){
+        this.socket.emit('getAllRooms');
+    }
+
     // getMessage(){
     //     return this.socket.fromEvent("message"), map( data => data.msg);
     // }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import {UserService} from '../services/user.service';
 import {NgForm} from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -9,7 +9,7 @@ import {Observable, Subscription} from 'rxjs';
   templateUrl: './login-with-account.component.html',
   styleUrls: ['./login-with-account.component.css']
 })
-export class LoginWithAccountComponent implements OnInit {
+export class LoginWithAccountComponent implements OnInit, OnDestroy {
 
   testLoginRes: Observable<object>;
   
@@ -27,9 +27,15 @@ export class LoginWithAccountComponent implements OnInit {
       this.registred = true;
       console.log(this.currentUsername);
       if (this.registred){
-        this.router.navigate(['chat/' + this.currentUsername]);
+        this.userService.setCurrentUserId(user.id);
+        this.userService.setCurrentUserName(user.username);
+        this.router.navigate(['chat']); 
       }
     })
+  }
+
+  ngOnDestroy(): void {
+    this.currentUsernameSubscription.unsubscribe();
   }
 
   onConnexion(form: NgForm) {

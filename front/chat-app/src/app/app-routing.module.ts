@@ -12,7 +12,7 @@ import { ChatComponent } from './chat/chat.component';
 const routes: Routes = [
   {path: '', component: LoginWithAccountComponent},
   {path: 'accueil', component: AccueilComponent},
-  {path: 'chat/:username', component: ChatComponent},
+  {path: 'chat', component: ChatComponent},
   {path: 'register', component: CreateAccountComponent},
   {path: 'user-profile', component: UserProfileComponent},
   { path: 'not-found', component: FourOhFourComponent },

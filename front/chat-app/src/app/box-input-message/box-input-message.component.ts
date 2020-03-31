@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { NgForm} from '@angular/forms';
 import { ChatService } from '../services/chat.service';
 import { Room } from 'src/models/room';
@@ -13,38 +13,37 @@ import { UserService } from '../services/user.service';
 export class BoxInputMessageComponent implements OnInit, OnDestroy {
   registred = false;
 
+  // @Input() username : string; 
+
   Channel_id: number;
   roomName: string ;
   currentRoomSubscription: Subscription;
 
-  username: string;
   userId: number;
-  currentUserSubscription: Subscription;
+  username : string;
+  
 
-  constructor(private chatService: ChatService, private userService: UserService) { }
+  constructor(private chatService: ChatService, private userService: UserService) {
+    
+   }
 
   ngOnInit(): void {
     this.currentRoomSubscription = this.chatService.currentRoom.subscribe((room) => {
       this.registred = true;
       this.Channel_id = room.id;
       this.roomName = room.nom;
-    });
 
-    this.currentUserSubscription = this.userService.currentUser.subscribe((user) => {
-      this.username = user.username;
-      this.userId = user.id;
-      console.log(this.username + 'Current username');
     });
+    this.username = this.userService.currentUserName
   }
 
   ngOnDestroy(): void {
     this.currentRoomSubscription.unsubscribe();
-    this.currentUserSubscription.unsubscribe();
   }
 
   onSubmit(form: NgForm) {
     const message = form.value['msg'];
-    this.userId = 1;
+    this.userId = this.userService.currentUserId;
     this.chatService.sendMessage(this.Channel_id, this.userId , message );
     form.reset();
   }

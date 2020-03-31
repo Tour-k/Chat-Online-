@@ -54,6 +54,7 @@ conn.connect(function(err) {
     socket.on('getAllRooms', ()=>{
       CRUDChannel.getAllChannels(conn, (res)=>{
         io.emit("rooms", res);
+        socket.emit('rooms', res);
       })
     })
 
@@ -107,8 +108,8 @@ conn.connect(function(err) {
       CRUDChannel.getAllChannels(conn, function(res){
         rooms = res;
         io.emit("rooms", rooms);
-    })
-  });
+      })
+    });
 
     // ___________________________________
     // ADD message
@@ -143,30 +144,34 @@ conn.connect(function(err) {
           console.log(res)
         })
       })
-
-
     });
 
     // Recuperer un utilisateur
     socket.on('getUser', user => {
       CRUDUser.getUserByUsername(conn, String(user.username),  (res) => {
         if(res){
-          // console.log("On est la avec res à : " + res)
           bcrypt.compare(user.password, res[0].password, (err, result) => {
             if(err) throw err ;
             
             if(result){
               socket.emit('user', res[0]);
             }
-            console.log(res);
             socket.emit("testLoginRes", result) //true or false  
           })
         }
       })
     });
-    
+
+    socket.on('getUserId', username => {
+      console.log(username);
+      CRUDUser.getUserByUsername(conn, String(username), (res)=>{
+        socket.emit('user', res[0]);
+      })
+    }) 
 
   });
+
+  
 
     
 
