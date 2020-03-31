@@ -3,6 +3,7 @@ import { NgForm} from '@angular/forms';
 import { ChatService } from '../services/chat.service';
 import { ActivatedRoute } from '@angular/router';
 import { UserService } from '../services/user.service';
+import { CookieService } from 'ngx-cookie-service';
 
 
 @Component({
@@ -12,14 +13,20 @@ import { UserService } from '../services/user.service';
 })
 export class ChatComponent implements OnInit {
 
-  username : string;
+  userName: string;
+  userId: number;
 
-  constructor(private chatService: ChatService, private userService : UserService, private route : ActivatedRoute) { }
+  constructor(
+    private chatService: ChatService,
+    private cookieService: CookieService,
+    private userService: UserService,
+    private route: ActivatedRoute) { }
 
   ngOnInit(): void {
 
     // console.log(this.username);
     // this.userService.getUserIdByUserName(this.username);
+    this.userName = this.cookieService.get('userName');
     this.chatService.getAllRooms();
   }
 
