@@ -4,6 +4,7 @@ import { ChatService } from '../services/chat.service';
 import { Room } from 'src/models/room';
 import { Observable, Subscription } from 'rxjs';
 import { UserService } from '../services/user.service';
+import { CookieService } from 'ngx-cookie-service';
  
 @Component({
   selector: 'app-box-input-message',
@@ -13,28 +14,25 @@ import { UserService } from '../services/user.service';
 export class BoxInputMessageComponent implements OnInit, OnDestroy {
   registred = false;
 
-  // @Input() username : string; 
-
-  Channel_id: number;
+  channelId: number;
   roomName: string ;
   currentRoomSubscription: Subscription;
 
   userId: number;
-  username : string;
-  
+  userName: string;
 
-  constructor(private chatService: ChatService, private userService: UserService) {
-    
+  constructor(private cookieService: CookieService, private chatService: ChatService, private userService: UserService) {
    }
 
   ngOnInit(): void {
     this.currentRoomSubscription = this.chatService.currentRoom.subscribe((room) => {
       this.registred = true;
-      this.Channel_id = room.id;
+      this.channelId = room.id;
       this.roomName = room.nom;
 
     });
-    this.username = this.userService.currentUserName
+    this.userName = this.cookieService.get('userName');
+    this.userId = parseInt(this.cookieService.get('userId'));
   }
 
   ngOnDestroy(): void {
@@ -44,7 +42,7 @@ export class BoxInputMessageComponent implements OnInit, OnDestroy {
   onSubmit(form: NgForm) {
     const message = form.value['msg'];
     this.userId = this.userService.currentUserId;
-    this.chatService.sendMessage(this.Channel_id, this.userId , message );
+    this.chatService.sendMessage(this.channelId, this.userId , message );
     form.reset();
   }
 }
