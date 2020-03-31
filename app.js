@@ -149,28 +149,34 @@ conn.connect(function(err) {
 
     // Recuperer un utilisateur
     socket.on('getUser', user => {
-      CRUDUser.verifyUserByUsername(conn, String(user.username), res => {
-        console.log('VERIFY user : '+res)
-        if(res){
-          CRUDUser.getUserByUsername(conn, String(user.username),  function(res) {
-            if(res !== undefined) {
-              bcrypt.compare(user.password, res[0].password, (err, res) => {
-                if (err) {
-                  console.error(err)
-                  return 
+      // CRUDUser.verifyUserByUsername(conn, String(user.username), res => {
+      //   console.log('VERIFY user : '+res)
+      //   if(res){
+          CRUDUser.getUserByUsername(conn, String(user.username),  (res) => {
+            if(res){
+              // console.log("On est la avec res à : " + res)
+              bcrypt.compare(user.password, res[0].password, (err, result) => {
+                if(err) throw err ;
+                
+                if(result){
+                  socket.emit('user', res[0]);
                 }
-                // console.log(res);
-                socket.emit("testLoginRes", res) //true or false
+                console.log(res);
+                socket.emit("testLoginRes", result) //true or false  
               })
+              
             }
-            console.log(res[0] + " GET USER");
-            socket.emit('user', res[0]);
+            // if(verifyPassword){
+            //   socket.emit('user', res[0]);
+            //   console.log(res[0]);
+            // }
+            
             // console.log(res[0].password);
           })
-        } else {
-          // TODO : retourner une valeur quand le user n'est pas enregistré dans la base 
-        }
-      })
+      //   } else {
+      //     // TODO : retourner une valeur quand le user n'est pas enregistré dans la base 
+      //   }
+      // })
       
     });
     

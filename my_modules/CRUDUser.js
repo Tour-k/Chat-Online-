@@ -3,12 +3,14 @@
 // VERIFY USER BY Username 
 // ___________________________________
 
-var verifyUserByUsername = function(conn, username, callback){
-    // TODO : resctifier la requet SQL ... ça fonctionne pas
-    conn.query("SELECT username FROM User WHERE EXISTS (SELECT username FROM User WHERE username ='" + username +"')", res =>{
-        callback(res)
-    })
-}
+// var verifyUserByUsername = function(conn, username, callback){
+//     // TODO : resctifier la requet SQL ... ça fonctionne pas
+//     console.log('exists query : ' + username);
+//     conn.query("SELECT username FROM User WHERE EXISTS (SELECT username FROM User WHERE username = " + username +")", res =>{
+        
+//         callback(res);
+//     })
+// }
 
 
 
@@ -37,12 +39,21 @@ var getAllUsers = function(conn, callback) {
 // GET USER BY USERNAME (test OK)
 // ___________________________________
 var getUserByUsername = function(conn, username, callback){
-    conn.query("SELECT * FROM User WHERE username = '"+username+"'",
-    function (err, result, fields) {
-        if (err) throw err;
-        console.log(result);
-        callback(result);
-    });
+    conn.query("SELECT username FROM User", (err, res) => {
+        res.forEach(element => {
+            if (element.username == username){
+                conn.query("SELECT * FROM User WHERE username = '" + username + "'",
+                    function (err, result, fields) {
+                        if (err) throw err;
+                        callback(result);
+                    });
+            } else {
+                callback(false)
+            }
+        });
+    })
+
+    
 }
 
 // ___________________________________
@@ -93,7 +104,7 @@ var updateUserAvatar = function(conn, id, avatar, callback){
     });
 }
 
-exports.verifyUserByUsername = verifyUserByUsername;
+// exports.verifyUserByUsername = verifyUserByUsername;
 exports.getUserById = getUserById;
 exports.getAllUsers = getAllUsers;
 exports.getUserByUsername = getUserByUsername;

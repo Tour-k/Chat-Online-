@@ -44,6 +44,7 @@ export class BoxInputMessageComponent implements OnInit, OnDestroy {
 
   onSubmit(form: NgForm) {
     const message = form.value['msg'];
+    this.userId = 1;
     this.chatService.sendMessage(this.Channel_id, this.userId , message );
     form.reset();
   }
