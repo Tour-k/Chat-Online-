@@ -12,8 +12,6 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class LoginWithAccountComponent implements OnInit, OnDestroy {
 
-  private cookieValue: string;
-
   testLoginRes: Observable<object>;
   registred = false ;
   currentUsername: string;
@@ -32,9 +30,6 @@ export class LoginWithAccountComponent implements OnInit, OnDestroy {
       // TODO : utiliser le cookie plutôt... 
       this.userService.setCurrentUserId(user.id);
       this.userService.setCurrentUserName(user.username);
-
-      
-    
     });
   }
 
