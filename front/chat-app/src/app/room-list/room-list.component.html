@@ -3,7 +3,7 @@
         
         <fa-icon (click)='deleteRoom(room.id)' [icon]="faTrash"> </fa-icon>
         <div id="room-list" (click)='loadRoom(room.id)'>
-            {{ room.nom | unescape:'recursive'}}
+            {{ room.nom }}
         </div>
          
     </mat-list-item>

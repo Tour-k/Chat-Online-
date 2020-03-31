@@ -26,7 +26,6 @@ import { BoxInputMessageComponent } from './box-input-message/box-input-message.
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { CookieService } from 'ngx-cookie-service';
 import { AvatarModule } from 'ngx-avatar';
-import { HTMLEscapeUnescapeModule } from 'html-escape-unescape';
 
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
@@ -70,8 +69,7 @@ const config: SocketIoConfig = {  url: 'http://localhost:8988', options: {} };
     FontAwesomeModule,
     MatCardModule,
     ScrollingModule,
-    AvatarModule,
-    HTMLEscapeUnescapeModule
+    AvatarModule
   ],
   providers: [CookieService, ChatService, Room, UserService, AuthGuard],
   bootstrap: [AppComponent]
