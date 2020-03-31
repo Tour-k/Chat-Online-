@@ -149,35 +149,20 @@ conn.connect(function(err) {
 
     // Recuperer un utilisateur
     socket.on('getUser', user => {
-      // CRUDUser.verifyUserByUsername(conn, String(user.username), res => {
-      //   console.log('VERIFY user : '+res)
-      //   if(res){
-          CRUDUser.getUserByUsername(conn, String(user.username),  (res) => {
-            if(res){
-              // console.log("On est la avec res à : " + res)
-              bcrypt.compare(user.password, res[0].password, (err, result) => {
-                if(err) throw err ;
-                
-                if(result){
-                  socket.emit('user', res[0]);
-                }
-                console.log(res);
-                socket.emit("testLoginRes", result) //true or false  
-              })
-              
-            }
-            // if(verifyPassword){
-            //   socket.emit('user', res[0]);
-            //   console.log(res[0]);
-            // }
+      CRUDUser.getUserByUsername(conn, String(user.username),  (res) => {
+        if(res){
+          // console.log("On est la avec res à : " + res)
+          bcrypt.compare(user.password, res[0].password, (err, result) => {
+            if(err) throw err ;
             
-            // console.log(res[0].password);
+            if(result){
+              socket.emit('user', res[0]);
+            }
+            console.log(res);
+            socket.emit("testLoginRes", result) //true or false  
           })
-      //   } else {
-      //     // TODO : retourner une valeur quand le user n'est pas enregistré dans la base 
-      //   }
-      // })
-      
+        }
+      })
     });
     
 
