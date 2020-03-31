@@ -6,7 +6,7 @@ var getUserById = function(conn, id, callback) {
         if (err) throw err;
             callback(result);
         });
-}
+};
 
 // ___________________________________
 // GET USER ALL USER (test OK)
@@ -15,9 +15,9 @@ var getAllUsers = function(conn, callback) {
 
     conn.query("SELECT * FROM User", function (err, result, fields) {
     if (err) throw err; 
-        callback(result);
+        callback(err, result);
     });
-}
+};
 
 // ___________________________________
 // GET USER BY USERNAME (test OK)
@@ -36,9 +36,7 @@ var getUserByUsername = function(conn, username, callback){
             }
         });
     })
-
-    
-}
+};
 
 // ___________________________________
 // DELETE USER BY ID (test OK)
@@ -50,7 +48,7 @@ var deleteUser = function(conn, id, callback){
     messageSuccess = "Number of records deleted: " + result.affectedRows;
     callback(messageSuccess);
 });
-}
+};
 
 // ___________________________________
 // CREATE USER
@@ -62,7 +60,7 @@ var createUser = function(conn, username, password, bio='', avatar='', callback)
         msgSuccess = username + " : inserted"
         callback(msgSuccess);
     });
-}
+};
 
 // ___________________________________
 // UPDATE USER BIO (test OK)
@@ -74,7 +72,7 @@ var updateUserBio = function (conn, id, bio, callback) {
         msgSuccess = result.affectedRows + " record(s) updated";
         callback(msgSuccess);
 });
-}
+};
 
 // ___________________________________
 // UPDATE USER AVATAR (test OK)
@@ -86,7 +84,7 @@ var updateUserAvatar = function(conn, id, avatar, callback){
         msgSuccess = result.affectedRows + " record(s) updated";
         callback(msgSuccess);
     });
-}
+};
 
 
 exports.getUserById = getUserById;

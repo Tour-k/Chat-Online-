@@ -146,23 +146,36 @@ conn.connect(function(err) {
       })
     });
 
-    
-
 
     // Creer un utilisateur
     socket.on('newUser', user => {
       const rounds = 8;
 
-      bcrypt.hash(user.password, rounds, (err, hashPassword) => {
-        if (err) {
-          console.error(err)
+      CRUDUser.getAllUsers(conn, (err, res) => {
+          let dupEntry = false;
+          if (err) {
+          console.error(err);
           return
         }
-        console.log(hashPassword);
-        CRUDUser.createUser(conn, String(user.username), String(hashPassword), String (user.bio), String (user.avatar), function(res) {
-          console.log(res)
-        })
-      })
+        for(let i = 0; i < res.length; i++) {
+          if(user.username === res[i].username) {
+            socket.emit('errDupEntry',  true );
+            dupEntry = true;
+          }
+        }
+          if (!dupEntry) {
+              bcrypt.hash(user.password, rounds, (err, hashPassword) => {
+                  if (err) {
+                      console.error(err);
+                      return
+                  }
+                  CRUDUser.createUser(conn, String(user.username), String(hashPassword), String(user.bio), String(user.avatar), function (res) {
+                      console.log(res)
+                  })
+              })
+          }
+      });
+
     });
 
     // Recuperer un utilisateur
