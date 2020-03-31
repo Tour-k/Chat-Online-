@@ -32,6 +32,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
+import { AuthGuard } from './services/auth-guard.service';
 
 
 
@@ -67,7 +68,7 @@ const config: SocketIoConfig = {  url: 'http://localhost:8988', options: {} };
     MatCardModule,
     ScrollingModule
   ],
-  providers: [CookieService, ChatService, Room, UserService],
+  providers: [CookieService, ChatService, Room, UserService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

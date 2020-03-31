@@ -7,12 +7,13 @@ import { LoginWithAccountComponent } from './login-with-account/login-with-accou
 import { CreateAccountComponent } from './create-account/create-account.component';
 import { FourOhFourComponent } from './four-oh-four/four-oh-four.component';
 import { ChatComponent } from './chat/chat.component';
+import { AuthGuard } from './services/auth-guard.service';
 
 
 const routes: Routes = [
   {path: '', component: LoginWithAccountComponent},
   {path: 'home', component: AccueilComponent},
-  {path: 'chat', component: ChatComponent},
+  {path: 'chat', canActivate: [AuthGuard],component: ChatComponent},
   {path: 'register', component: CreateAccountComponent},
   {path: 'user-profile', component: UserProfileComponent},
   { path: 'not-found', component: FourOhFourComponent },

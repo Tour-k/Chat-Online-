@@ -22,7 +22,7 @@ export class LoginWithAccountComponent implements OnInit, OnDestroy {
   constructor(private userService: UserService, private router: Router, private cookieService: CookieService) { }
 
   ngOnInit(): void {
-    this.testLoginRes = this.userService.testLoginRes;
+    // this.testLoginRes = this.userService.testLoginRes;
 
     this.currentUsernameSubscription = this.userService.currentUser.subscribe((user) => {
       this.cookieService.set('userName', user.username);
