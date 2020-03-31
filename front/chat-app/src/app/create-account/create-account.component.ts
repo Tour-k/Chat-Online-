@@ -17,6 +17,16 @@ export class CreateAccountComponent implements OnInit {
 
   onRegister(form: NgForm) {
     this.userService.register(form.value);
-    /*this.router.navigateByUrl('/chat');*/
+    this.router.navigateByUrl('/chat');
   }
+
+  toLogin() {
+    this.router.navigateByUrl('login');
+  }
+
+  toHome() {
+    this.router.navigateByUrl('home');
+  }
+
+
 }
