@@ -1,21 +1,21 @@
 <div id='container-message' fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="gappx" *ngIf='registred'>
 
-    <!-- <h2 *ngFor='let currentRoom of room | async'> {{currentRoom.nom}}</h2> -->
-    <h2> {{currentRoom}} </h2>
+  <!-- <h2 *ngFor='let currentRoom of room | async'> {{currentRoom.nom}}</h2> -->
+  <h2> {{currentRoom}} </h2>
 
-    <mat-list>
-        <mat-list-item  *ngFor='let msg of messages | async'> 
-            <div fxLayout="column" fxLayoutAlign="start start">
-                <div>{{msg.username}}</div>
-                
-                <div>{{ msg.message }}</div> 
-            </div>
-        
-            <mat-divider>
-            </mat-divider>
+  <mat-list>
+    <mat-list-item  *ngFor='let msg of messages | async'>
+      <div fxLayout="column" fxLayoutAlign="start start">
+        <div>{{msg.username}}</div>
 
-        </mat-list-item>
-    </mat-list>
+        <div>{{ msg.message }}</div>
+      </div>
+
+      <mat-divider>
+      </mat-divider>
+
+    </mat-list-item>
+  </mat-list>
 
 </div>
 
