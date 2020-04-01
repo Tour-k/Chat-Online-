@@ -33,6 +33,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
+import { HttpClientModule } from '@angular/common/http';
 
 const config: SocketIoConfig = {  url: 'http://localhost:8988', options: {} };
 
@@ -65,6 +66,7 @@ const config: SocketIoConfig = {  url: 'http://localhost:8988', options: {} };
     FontAwesomeModule,
     MatCardModule,
     ScrollingModule,
+    HttpClientModule,
     AvatarModule
   ],
   providers: [CookieService, ChatService, Room, UserService, AuthGuard],

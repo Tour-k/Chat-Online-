@@ -1,7 +1,12 @@
 #message-form{
+    height: 10%;
     position : absolute;
     width: 70%;
     bottom : 0;
     padding-top: 10px;
     border-top: solid 1px rgb(224, 224, 224);
+}
+
+.mat-form-field{
+    width: 85%;
 }
