@@ -1,5 +1,41 @@
 #container-message{
-  height: 100%;
-  // background-color: green;
+    height: calc(100vh - 155px);
+    overflow: scroll;
+    // height: 100%;
+    // background-color: green;
 }
 
+
+div.avatar-content.ng-star-inserted{
+    display:flex;
+}
+
+.contentMessage{
+    margin-bottom: 10px;
+
+}
+
+.avatar{
+    margin-right: 5px;
+    margin-bottom: 5px;
+}
+
+
+.messageUsername{
+    font-weight: bold;
+}
+
+
+.messageDate{
+    color : rgb(224, 224, 224);
+    margin-left: 5px;
+}
+
+.divider{
+    margin-top: 5px;
+}
+
+mat-list-item.mat-list-item.mat-focus-indicator.messageListItem.ng-star-inserted{
+    height: auto;
+    margin-bottom: 5px;
+}

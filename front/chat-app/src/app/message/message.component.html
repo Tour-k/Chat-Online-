@@ -3,16 +3,32 @@
   <!-- <h2 *ngFor='let currentRoom of room | async'> {{currentRoom.nom}}</h2> -->
   <h2> {{currentRoom}} </h2>
 
-  <mat-list>
-    <mat-list-item  *ngFor='let msg of messages | async'>
-      <div fxLayout="column" fxLayoutAlign="start start">
-        <div>{{msg.username}}</div>
 
-        <div>{{ msg.message }}</div>
-      </div>
+    <mat-list role="list">
+        <mat-list-item  *ngFor='let msg of messages | async' class="messageListItem" role="listitem">
 
-      <mat-divider>
-      </mat-divider>
+            <div fxFlex="50px" fxFlexAlign="start"class="avatar" >
+                <ngx-avatar [round]="false" name={{msg.username}} > </ngx-avatar>
+            </div>
+
+
+
+            <div fxLayout="column" fxLayoutAlign="start start" class="contentMessage">
+
+                <div fxLayout="row">
+
+                    <div class="messageUsername">{{msg.username}} :  </div>
+                    <div class="messageDate">{{msg.updateat | date :'HH:mm z' }} </div>
+
+                </div>
+
+                <div class="message">{{ msg.message }}</div>
+
+            </div>
+
+
+            <!-- <mat-divider class="divider">
+            </mat-divider> -->
 
     </mat-list-item>
   </mat-list>

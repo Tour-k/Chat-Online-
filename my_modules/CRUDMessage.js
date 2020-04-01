@@ -2,7 +2,7 @@
 // GET All Message By Channel Id (test OK)
 // ___________________________________
 var getAllMessagesByChannelId = function(conn, channelId, callback){
-    conn.query("SELECT Message.id, Message.message, User.username FROM Message INNER JOIN User ON Message.User_id = User.id WHERE Channel_id =" + channelId ,
+    conn.query("SELECT Message.id, Message.message, Message.updateat ,User.username FROM Message INNER JOIN User ON Message.User_id = User.id WHERE Channel_id =" + channelId ,
     function (err, result, fields) {
         if (err) throw err;
         callback(result);
@@ -26,7 +26,7 @@ var deleteAllMessageByChannelId = function(conn, channelId, callback){
 // CREATE Message (test OK)
 // ___________________________________
 var createMessage = function(conn, channelId, userID, message, callback ){
-    conn.query("INSERT INTO Message VALUES (NULL, "+ channelId + ",  " + userID + ", '" + message + "', '', '');", 
+    conn.query("INSERT INTO Message VALUES (NULL, "+ channelId + ",  " + userID + ", '" + message + "', '', "+ String(Date.now())+");", 
         (err, result) =>{
             if (err) throw err;
             callback('Nouveau message enregistré dans la BDD !!')
