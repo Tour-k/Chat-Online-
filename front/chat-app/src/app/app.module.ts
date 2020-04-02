@@ -13,6 +13,7 @@ import { RoomListComponent } from './room-list/room-list.component';
 import { MessageComponent } from './message/message.component';
 import { ChatComponent } from './chat/chat.component';
 import { AppComponent } from './app.component';
+import { BtnsNavComponent } from './btns-nav/btns-nav.component';
 
 import { Room } from 'src/models/room';
 import { ChatService } from './services/chat.service';
@@ -26,6 +27,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { BoxInputMessageComponent } from './box-input-message/box-input-message.component';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { AvatarModule } from 'ngx-avatar';
+import { HttpClientModule } from '@angular/common/http';
 
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
@@ -33,7 +35,10 @@ import { MatListModule } from '@angular/material/list';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
-import { HttpClientModule } from '@angular/common/http';
+
+
+
+
 
 const config: SocketIoConfig = {  url: 'http://localhost:8988', options: {} };
 
@@ -49,7 +54,8 @@ const config: SocketIoConfig = {  url: 'http://localhost:8988', options: {} };
     ChatComponent,
     RoomListComponent,
     MessageComponent,
-    BoxInputMessageComponent
+    BoxInputMessageComponent,
+    BtnsNavComponent
   ],
   imports: [
     BrowserModule,

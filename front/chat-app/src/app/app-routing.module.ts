@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { AuthGuard } from './services/auth-guard.service';
 
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { AccueilComponent } from './accueil/accueil.component';
@@ -7,7 +8,7 @@ import { LoginWithAccountComponent } from './login-with-account/login-with-accou
 import { CreateAccountComponent } from './create-account/create-account.component';
 import { FourOhFourComponent } from './four-oh-four/four-oh-four.component';
 import { ChatComponent } from './chat/chat.component';
-import { AuthGuard } from './services/auth-guard.service';
+
 
 
 const routes: Routes = [
