@@ -4,14 +4,23 @@
     height: 100vh;
 }
 
-#colone-chat{
+.messageContentChat{
     margin-top: 5%;
     margin-left: 5%;
+}
+
+.inboxContentChat{
+    margin-left: 5%;
+}
+
+#colone-chat{
+    
+    
     height : 80%;
 }
 
 .chat{
     display : block;
-    height: 100vh;
+    height: calc(100vh - 30px);
 }
 
