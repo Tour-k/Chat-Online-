@@ -64,16 +64,17 @@ conn.connect(function(err) {
     // ___________________________________
     //récupération les messages d'un channel
     // ___________________________________
-    socket.on("getRoom", roomId => {
-      safeJoin(roomId);
-      CRUDChannel.getChannelById(conn, roomId, res=>{
+    socket.on("getRoom", data => {
+      safeJoin(data[0]);
+      socket.broadcast.to(data[0]).emit('notification', data[1]);
+      CRUDChannel.getChannelById(conn, data[0], res=>{
         res.forEach(element => {
           element.nom = unescape(element.nom);
         });
         socket.emit('room', res[0])
         // console.log( res[0] + " : en faisant un GET")
       })
-      CRUDMessage.getAllMessagesByChannelId(conn, roomId, (res)=>{
+      CRUDMessage.getAllMessagesByChannelId(conn, data[0], (res)=>{
         res.forEach(element => {
           element.message = unescape(element.message);
         });
