@@ -49,4 +49,9 @@ export class ChatService {
     getAllRooms() {
         this.socket.emit('getAllRooms');
     }
+
+    updateRoom(roomId : number, newName : string ){
+        this.socket.emit('updateRoom', [roomId, newName]);
+    }
+
 }
