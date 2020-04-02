@@ -1,35 +1,29 @@
 <!-- <div fxFlex="%"> -->
   <div id='room' fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="gappx">
+    <app-btns-nav></app-btns-nav>
     <h2>New Channel</h2>
-  
     <div fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="gappx">
       <form (ngSubmit)="onSubmit(f)" #f="ngForm" fx>
         <mat-form-field class="example-full-width">
           <mat-label>Add a new Room</mat-label>
           <input matInput placeholder="Ex. Pizza" id="roomName" name="roomName" ngModel required>
         </mat-form-field>
-  
         <div>
           <button type = 'submit' mat-raised-button  color="primary" [disabled]='f.invalid'>ok</button>
         </div>
-        
       </form>
     </div>
-  
-
     <app-room-list></app-room-list> 
   </div>
 
 <!-- </div> -->
 
-
 <mat-divider
   [vertical]="true">
-  
 </mat-divider> 
 
-
 <div id='colone-chat' fxFlex="80%">
+<<<<<<< HEAD
   <div class='chat' fxLayout="column" >
     <div class='messageContentChat'>
       <app-message ></app-message>
@@ -39,10 +33,12 @@
       <app-box-input-message></app-box-input-message>
     </div>
     
+=======
+  <div class='chat' fxLayout="column" fxLayoutAlign="space-between start" fxLayoutGap="gappx">
+    <app-message ></app-message>
+    <app-box-input-message></app-box-input-message>
+>>>>>>> 79a3f54db7cb69e4e576c73c24cd46678b862a6e
   </div>
-
-
-  
 </div>
 
 
