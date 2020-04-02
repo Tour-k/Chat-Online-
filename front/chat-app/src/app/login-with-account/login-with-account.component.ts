@@ -46,6 +46,6 @@ export class LoginWithAccountComponent implements OnInit, OnDestroy {
   }
 
   toHome() {
-    this.router.navigateByUrl('home');
+    this.router.navigateByUrl('');
   }
 }

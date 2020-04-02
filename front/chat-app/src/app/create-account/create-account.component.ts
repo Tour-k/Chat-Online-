@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import {UserService} from '../services/user.service';
+import { UserService } from '../services/user.service';
 import { Router } from '@angular/router';
-import {Observable, Subscription} from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-create-account',
@@ -10,17 +11,24 @@ import {Observable, Subscription} from 'rxjs';
   styleUrls: ['./create-account.component.css']
 })
 export class CreateAccountComponent implements OnInit {
-
-  testLoginRes: Observable<object>;
   errDupEntry = false;
   errDupEntrySubscription: Subscription;
+  username = null;
+  userId = null;
+
+  currentUserSubscription: Subscription;
 
 
-  constructor(private userService: UserService, private router: Router) { }
+  constructor(private userService: UserService, private router: Router, private cookieService: CookieService) { }
 
   ngOnInit(): void {
     this.errDupEntrySubscription = this.userService.errDupEntry.subscribe(res => {
       this.errDupEntry = res;
+    });
+    this.currentUserSubscription = this.userService.currentUser.subscribe((user) => {
+      this.username = user.username;
+      this.userId = user.id;
+      console.log('coucou test in create account TS');
     });
   }
 
@@ -28,8 +36,12 @@ export class CreateAccountComponent implements OnInit {
     this.errDupEntry = false;
     this.userService.register(form.value);
     if ( !this.errDupEntry) {
-      //TODO : set cookie for user name and user id befor redirection
-      this.router.navigateByUrl('/chat');
+      console.log('user name from form : ' + form.value.username);
+
+      //this.cookieService.set('userName', );
+      //this.userService.getUserIdByUserName(form.value.username);
+      //this.cookieService.set('userId', user.id.toString());
+      //this.router.navigateByUrl('/chat');
     }
   }
 
@@ -38,7 +50,7 @@ export class CreateAccountComponent implements OnInit {
   }
 
   toHome() {
-    this.router.navigateByUrl('home');
+    this.router.navigateByUrl('');
   }
 
 

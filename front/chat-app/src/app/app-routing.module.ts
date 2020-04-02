@@ -12,12 +12,12 @@ import { ChatComponent } from './chat/chat.component';
 
 
 const routes: Routes = [
-  {path: 'home', component: AccueilComponent},
-  {path: '', component: LoginWithAccountComponent},
+  {path: '', component: AccueilComponent},
+  {path: 'login', component: LoginWithAccountComponent},
   // {path : 'chat', component: ChatComponent}, //TODO : Passer cette ligne en commentaire et activer celle en dessous
   {path: 'chat', canActivate: [AuthGuard],component: ChatComponent},
   {path: 'register', component: CreateAccountComponent},
-  {path: 'user-profile', component: UserProfileComponent},
+  {path: 'profile', component: UserProfileComponent},
   { path: 'not-found', component: FourOhFourComponent },
   { path: '**', redirectTo: 'not-found' },
 ];

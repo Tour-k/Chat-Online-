@@ -169,10 +169,12 @@ conn.connect(function(err) {
                       console.error(err);
                       return
                   }
-                  CRUDUser.createUser(conn, String(user.username), String(hashPassword), String(user.bio), String(user.avatar), function (res) {
-                      console.log(res)
+                  CRUDUser.createUser(conn, String(user.username), String(hashPassword), String(user.bio), String(user.avatar), function (resMessage, res) {
+                      console.log(resMessage);
+                      console.log(res);
                   })
               })
+
           }
       });
 
@@ -195,8 +197,9 @@ conn.connect(function(err) {
     });
 
     socket.on('getUserId', username => {
-      console.log(username);
+      console.log('in node username' + String(username));
       CRUDUser.getUserByUsername(conn, String(username), (res)=>{
+        console.log('in node getUserId res : ' + res);
         socket.emit('user', res[0]);
       })
     }) 

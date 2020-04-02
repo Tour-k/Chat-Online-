@@ -7,18 +7,16 @@ import {Room} from "../../models/room";
 
 @Injectable()
 export class UserService {
-
   errDupEntry = this.socket.fromEvent<boolean>('errDupEntry');
   testLoginRes = this.socket.fromEvent<boolean>('testLoginRes');
   testLoginSubscription: Subscription;
   registred = false;
-  
 
   currentUser = this.socket.fromEvent<User>('user');
-  
-  //TODO currentUserName  et  currentUserIdà supprimer => utilisation du cookie 
+
+  //TODO currentUserName  et  currentUserIdà supprimer => utilisation du cookie
   // currentUserName: string;
-  // currentUserId: number;
+  // currentUserId: number
 
   constructor(private socket: Socket, private router: Router) {
     this.testLoginSubscription = this.testLoginRes.subscribe((res) => {this.registred = res; this.router.navigate(['chat']);});
@@ -33,7 +31,12 @@ export class UserService {
     this.socket.emit('getAllRooms');
   }
 
+  logout() {
+    this.registred = false;
+  }
+
   getUserIdByUserName(username) {
+    console.log('Username in Get UserID By UserName : ' + username);
     this.socket.emit('getUserId', username);
   }
 
