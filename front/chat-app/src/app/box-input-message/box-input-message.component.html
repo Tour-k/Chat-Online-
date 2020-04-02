@@ -1,17 +1,19 @@
-<form id="message-form" (ngSubmit)="onSubmit(f)" #f="ngForm" *ngIf="registred">
-    <p> Vous êtes connecté en tant que : {{ userName }} </p>
-    <div fxLayout="row" fxLayoutAlign="space-between start">
-      <mat-form-field >
-            <mat-label>Envoyer un message : </mat-label>
-            <textarea class='inputTextarea' matInput id="msg" name="msg" placeholder="Ecrivez votre message !" ngModel></textarea>
-            <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
-        </mat-form-field>
-        <button
-          mat-raised-button
-          type="submit"
-          color="primary"
-          [disabled]='f.invalid'>
-            Envoyer
-        </button>
-    </div>
-</form>
+<div fxLayout="column" fxLayoutAlign="end start" class='boxContent'>
+  <form id="message-form" (ngSubmit)="onSubmit(f)" #f="ngForm" *ngIf="registred">
+      <p> Vous êtes connecté en tant que : {{ userName }} </p>
+      <div fxLayout="row" fxLayoutAlign="space-between start">
+        <mat-form-field >
+              <mat-label>Envoyer un message : </mat-label>
+              <textarea class='inputTextarea' matInput id="msg" name="msg" placeholder="Ecrivez votre message !" ngModel></textarea>
+              <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+          </mat-form-field>
+          <button
+            mat-raised-button
+            type="submit"
+            color="primary"
+            [disabled]='f.invalid'>
+              Envoyer
+          </button>
+      </div>
+  </form>
+</div>
