@@ -134,7 +134,7 @@ conn.connect(function(err) {
     // ___________________________________
     socket.on('updateRoom', data =>{
       console.log(data[1]);
-      CRUDChannel.updateChannelName(conn, data[0], String(data[1]), (res)=>{
+      CRUDChannel.updateChannelName(conn, data[0], escape(String(data[1])), (res)=>{
         console.log(res);
       })
       CRUDChannel.getAllChannels(conn, function(res){

@@ -9,10 +9,12 @@
     <form class="form" (ngSubmit)="onUpdate(f)" #f="ngForm" >
       <mat-form-field class="field-full-width">
         <mat-label for="roomName">Modify Room Name</mat-label>
-        <input type="text" id="roomName" name="roomName" ngModel matInput placeholder="{{currentRoom}}">
+        <input type="text" #input maxlength="30" id="roomName" name="roomName" ngModel matInput placeholder="{{currentRoom}}">
+        <mat-hint align="end">{{input.value?.length || 0}}/30</mat-hint>
       </mat-form-field>
       <div fxLayoutAlign="end center" class="btn-action">
         <button type="submit">Valider</button>
+        <button (click)=onAnnuler()>Annuler</button>
       </div>
     </form>
   </ng-template>

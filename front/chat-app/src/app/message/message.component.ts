@@ -47,4 +47,7 @@ export class MessageComponent implements OnInit, OnDestroy {
   onUpdate(form :NgForm){
     this.chatServie.updateRoom(this.currentRoomId, form.value.roomName);
   }
+  onAnnuler(){
+    this.update = false;
+  }
 }
