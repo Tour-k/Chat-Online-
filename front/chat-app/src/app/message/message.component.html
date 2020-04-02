@@ -8,7 +8,7 @@
         <mat-list-item  *ngFor='let msg of messages | async' class="messageListItem" role="listitem">
 
             <div fxFlex="50px" fxFlexAlign="start"class="avatar" >
-                <ngx-avatar [round]="false" name={{msg.username}} > </ngx-avatar>
+                <ngx-avatar [round]="false" name={{msg.username}} [cornerRadius]="10" > </ngx-avatar>
             </div>
 
 
