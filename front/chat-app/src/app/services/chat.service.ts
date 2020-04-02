@@ -15,7 +15,8 @@ export class ChatService {
 
     messages = this.socket.fromEvent<any>('messages');
 
-    notification = this.socket.fromEvent<string>('notification');
+    notificationIn = this.socket.fromEvent<string>('notificationIn');
+    notificationOut = this.socket.fromEvent<string>('notificationOut');
 
     constructor(private socket: Socket, private userService: UserService, private cookieService: CookieService) {}
 

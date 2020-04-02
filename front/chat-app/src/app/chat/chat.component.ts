@@ -17,7 +17,8 @@ export class ChatComponent implements OnInit, OnDestroy {
 
   userName: string;
   userId: number;
-  notificationSubscription : Subscription;
+  notificationInSubscription : Subscription;
+  notificationOutSubscription : Subscription;
 
   constructor(
     private chatService: ChatService,
@@ -32,11 +33,12 @@ export class ChatComponent implements OnInit, OnDestroy {
     // this.userService.getUserIdByUserName(this.username);
     this.userName = this.cookieService.get('userName');
     this.chatService.getAllRooms();
-    this.notificationSubscription = this.chatService.notification.subscribe((username)=> this.createNotification(username))
+    this.notificationInSubscription = this.chatService.notificationIn.subscribe((username)=> this.createNotificationIn(username))
+    this.notificationOutSubscription = this.chatService.notificationOut.subscribe((username)=> this.createNotificationOut(username))
   }
 
   ngOnDestroy(){
-    this.notificationSubscription.unsubscribe();
+    this.notificationInSubscription.unsubscribe();
   }
 
   onSubmit(form: NgForm) {
@@ -46,12 +48,22 @@ export class ChatComponent implements OnInit, OnDestroy {
 
   }
 
-  createNotification(username){
+  createNotificationIn(username){
     this.notificationService.info('Nouvelle connexion :', username + ' vient de se connecter' , {
+      timeOut: 3000,
+      showProgressBar: true,
+      pauseOnHover: true,
+      clickToClose: true
+    }); 
+  }
+
+  createNotificationOut(username){
+    this.notificationService.info('INFO', username + ' est sortit de ce chat', {
       timeOut: 3000,
       showProgressBar: true,
       pauseOnHover: true,
       clickToClose: true
     });
   }
+
 }

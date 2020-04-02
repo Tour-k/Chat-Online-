@@ -43,8 +43,9 @@ conn.connect(function(err) {
     })
     
     let previousId;
-    const safeJoin = currentId => {
+    const safeJoin = (currentId, username) => {
       socket.leave(previousId);
+      socket.broadcast.to(previousId).emit('notificationOut', username );
       socket.join(currentId);
       console.log('joined to currenrId : '+currentId)
       previousId = currentId;
@@ -65,8 +66,8 @@ conn.connect(function(err) {
     //récupération les messages d'un channel
     // ___________________________________
     socket.on("getRoom", data => {
-      safeJoin(data[0]);
-      socket.broadcast.to(data[0]).emit('notification', data[1]);
+      safeJoin(data[0], data[1]);
+      socket.broadcast.to(data[0]).emit('notificationIn', data[1]);
       CRUDChannel.getChannelById(conn, data[0], res=>{
         res.forEach(element => {
           element.nom = unescape(element.nom);
