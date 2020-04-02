@@ -37,7 +37,7 @@ export class ChatService {
     }
 
     getAllMessagesByRoomId(roomId: number) {
-        const userName = this.cookieService.get('userName');
+        const userName = this.userService.currentUserName;
         const data = [roomId, userName];
         this.socket.emit('getRoom', data);
     }

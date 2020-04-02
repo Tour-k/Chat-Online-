@@ -17,7 +17,7 @@ export class UserService {
   currentUser = this.socket.fromEvent<User>('user');
   
   //TODO currentUserName  et  currentUserIdà supprimer => utilisation du cookie 
-  // currentUserName: string;
+  currentUserName: string;
   // currentUserId: number;
 
   constructor(private socket: Socket, private router: Router) {
@@ -38,9 +38,9 @@ export class UserService {
   }
 
   //TODO a supprimer 
-  // setCurrentUserName(username) {
-  //   this.currentUserName = username ;
-  // }
+  setCurrentUserName(username) {
+    this.currentUserName = username ;
+  }
   //TODO a supprimer 
   // setCurrentUserId(userid) {
   //   this.currentUserId = userid ;

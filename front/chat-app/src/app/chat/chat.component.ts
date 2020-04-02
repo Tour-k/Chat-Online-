@@ -31,7 +31,7 @@ export class ChatComponent implements OnInit, OnDestroy {
 
     // console.log(this.username);
     // this.userService.getUserIdByUserName(this.username);
-    this.userName = this.cookieService.get('userName');
+    this.userName = this.userService.currentUserName;
     this.chatService.getAllRooms();
     this.notificationInSubscription = this.chatService.notificationIn.subscribe((username)=> this.createNotificationIn(username))
     this.notificationOutSubscription = this.chatService.notificationOut.subscribe((username)=> this.createNotificationOut(username))
@@ -49,7 +49,7 @@ export class ChatComponent implements OnInit, OnDestroy {
   }
 
   createNotificationIn(username){
-    this.notificationService.info('Nouvelle connexion :', username + ' vient de se connecter' , {
+    this.notificationService.info('Nouvelle connexion :', username + ' vient de se connecter à ce chat' , {
       timeOut: 3000,
       showProgressBar: true,
       pauseOnHover: true,
