@@ -1,4 +1,12 @@
+.accueilHTML {
+  background: rgb(38,38,43);
+  background: linear-gradient(90deg, rgba(38,38,43,1) 0%, rgba(110,110,113,1) 100%);
+}
 
+.login-wrapper {
+  position: relative;
+  top: -100px;
+}
 
 .card {
   padding: 0;
@@ -36,4 +44,27 @@
 .btn-action {
   margin-bottom: 15px;
   margin-right: 15px;
+}
+
+.angularPic{
+  position: relative;
+  height: 250px;
+  width: auto;
+  top: 350px;
+  left: 10%;
+}
+
+.nodePic {
+  position: relative;
+  height: 250px;
+  width: auto;
+  left: 25%;
+}
+
+.socketPic {
+  position: relative;
+  height: 250px;
+  width: auto;
+  top: 350px;
+  left: 40%;
 }

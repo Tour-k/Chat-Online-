@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { UserService } from '../services/user.service';
 import { Router } from '@angular/router';
+import { User } from '../../models/user';
 import { Observable, Subscription } from 'rxjs';
 import { CookieService } from 'ngx-cookie-service';
 
@@ -12,11 +13,11 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class CreateAccountComponent implements OnInit {
   errDupEntry = false;
-  errDupEntrySubscription: Subscription;
-  username = null;
-  userId = null;
+  newUser: User;
+  newUserId: null;
 
-  currentUserSubscription: Subscription;
+  errDupEntrySubscription: Subscription;
+  newUserSubscription: Subscription;
 
 
   constructor(private userService: UserService, private router: Router, private cookieService: CookieService) { }
@@ -25,23 +26,22 @@ export class CreateAccountComponent implements OnInit {
     this.errDupEntrySubscription = this.userService.errDupEntry.subscribe(res => {
       this.errDupEntry = res;
     });
-    this.currentUserSubscription = this.userService.currentUser.subscribe((user) => {
-      this.username = user.username;
-      this.userId = user.id;
-      console.log('coucou test in create account TS');
+    this.newUserSubscription = this.userService.newUser.subscribe((user) => {
+      console.log(user[0].insertId);
+      this.newUserId = user[0].insertId;
     });
   }
 
   onRegister(form: NgForm) {
     this.errDupEntry = false;
     this.userService.register(form.value);
-    if ( !this.errDupEntry) {
-      console.log('user name from form : ' + form.value.username);
-
-      //this.cookieService.set('userName', );
-      //this.userService.getUserIdByUserName(form.value.username);
-      //this.cookieService.set('userId', user.id.toString());
-      //this.router.navigateByUrl('/chat');
+    if (this.errDupEntry) {
+      return
+    } else {
+      this.cookieService.set('userName', form.value.username);
+      this.cookieService.set('userId', this.newUserId);
+     // var values = [];
+     // this.userService.login([username:form.value.username, password:form.value.username ]);
     }
   }
 

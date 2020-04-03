@@ -54,11 +54,11 @@ var deleteUser = function(conn, id, callback){
 // CREATE USER
 // ___________________________________
 var createUser = function(conn, username, password, bio='', avatar='', callback){
-    var sql = "INSERT INTO user(username, password, bio, avatar) VALUES (?,?,?,?); SELECT * from User WHERE username=?";
-    conn.query(sql, [username, password, bio, avatar], function (err, result) {
+    var sql = "INSERT INTO `User`(`username`, `password`, `bio`, `avatar`) VALUES (?,?,?,?); SELECT * FROM User WHERE `username` =  ?\;";
+    conn.query(sql, [username, password, bio, avatar, username], function (err, result) {
         if (err) throw err;
-        msgSuccess = username + " : inserted"
-        callback(msgSuccess, result);
+        msgSuccess = username + " : inserted";
+        callback(msgSuccess, result, username );
     });
 };
 

@@ -1,9 +1,11 @@
-<html>
-  <div>
-    <p> Bonjour </p>
-    <p>accueil works!</p>
-    <a routerLink="/chat"> Channel </a>
-    <a routerLink="/profile"> Profile utilisateur </a>
-    <a routerLink="/"> Deconnexion </a>
+<html class="accueilHTML">
+<img class="angularPic" src="assets/Angular.png" alt="angularImageAccueil" >
+<img class="nodePic" src="assets/nodejs.png" alt="nodeImageAccueil" >
+<img class="socketPic" src="assets/socketio.png" alt="socketImageAccueil" >
+<div class="login-wrapper" fxLayout="column" fxLayoutAlign="center center">
+  <div class="accueilContent">
+    <p class="accueilText"> Bienvenue sur IRC CHAT </p>
+    <button routerLink="/chat" mat-raised-button class="accueilButton"> Entrer </button>
   </div>
+</div>
 </html>

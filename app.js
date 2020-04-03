@@ -21,7 +21,8 @@ var conn = mysql.createConnection({
   database: 'mydb',
   host: "localhost",
   user: "root",
-  password: "root"
+  password: "root",
+  multipleStatements: true
 });
  
 conn.connect(function(err) {
@@ -169,9 +170,9 @@ conn.connect(function(err) {
                       console.error(err);
                       return
                   }
-                  CRUDUser.createUser(conn, String(user.username), String(hashPassword), String(user.bio), String(user.avatar), function (resMessage, res) {
-                      console.log(resMessage);
-                      console.log(res);
+                  CRUDUser.createUser(conn, String(user.username), String(hashPassword), String(user.bio), String(user.avatar), (resMessage, user, username) => {
+                      console.log("res message : " + resMessage);
+                      socket.emit('newUserBack', user);
                   })
               })
 

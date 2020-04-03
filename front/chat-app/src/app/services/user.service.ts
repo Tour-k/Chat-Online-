@@ -7,6 +7,7 @@ import {Room} from "../../models/room";
 
 @Injectable()
 export class UserService {
+  newUser = this.socket.fromEvent<User>('newUserBack');
   errDupEntry = this.socket.fromEvent<boolean>('errDupEntry');
   testLoginRes = this.socket.fromEvent<boolean>('testLoginRes');
   testLoginSubscription: Subscription;
@@ -30,6 +31,11 @@ export class UserService {
     this.socket.emit('getUser', values);
     this.socket.emit('getAllRooms');
   }
+
+  firstLogin() {
+    this.registred = true;
+  }
+
 
   logout() {
     this.registred = false;

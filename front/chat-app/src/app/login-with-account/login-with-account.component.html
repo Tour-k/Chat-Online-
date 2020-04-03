@@ -1,3 +1,7 @@
+<html class="accueilHTML">
+<img class="angularPic" src="assets/Angular.png" alt="angularImageAccueil" >
+<img class="nodePic" src="assets/nodejs.png" alt="nodeImageAccueil" >
+<img class="socketPic" src="assets/socketio.png" alt="socketImageAccueil" >
 <div class="login-wrapper" fxLayout="row" fxLayoutAlign="center center">
   <mat-card class="card box">
     <mat-card-header class="header">
@@ -5,7 +9,6 @@
     </mat-card-header>
 
     <form class="form" (ngSubmit)="onConnexion(f)" #f="ngForm" >
-
       <mat-card-content class="content">
         <mat-form-field class="field-full-width">
           <mat-label for="username">Username</mat-label>
@@ -21,9 +24,11 @@
       </div>
 
       <div fxLayoutAlign="end center" class="btn-action">
-        <button mat-stroked-button (click)="toHome()" color="accent" class="btn-block">Home</button>
-        <button mat-stroked-button (click)="toSignUp()" color="accent" class="btn-block">Create account</button>
+        <button mat-stroked-button (click)="toHome()" color="accent" class="btn-block">Accueil</button>
+        <button mat-stroked-button (click)="toSignUp()" color="accent" class="btn-block">Créer un compte</button>
       </div>
     </form>
   </mat-card>
 </div>
+
+</html>
