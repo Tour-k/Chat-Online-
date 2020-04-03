@@ -16,6 +16,7 @@ export class CreateAccountComponent implements OnInit {
   newUser: User;
   newUserId: null;
   newUserName: string;
+  userNameSend: string;
 
   errDupEntrySubscription: Subscription;
   newUserSubscription: Subscription;
@@ -43,6 +44,7 @@ export class CreateAccountComponent implements OnInit {
   onRegister(form: NgForm) {
     this.errDupEntry = false;
     this.userService.register(form.value);
+    this.userNameSend = form.value.username;
   }
 
   toLogin() {

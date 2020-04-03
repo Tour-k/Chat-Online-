@@ -25,7 +25,9 @@ export class ChatComponent implements OnInit, OnDestroy {
     private cookieService: CookieService,
     private userService: UserService,
     private notificationService: NotificationsService,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute) {
+
+  }
 
   ngOnInit(): void {
 
