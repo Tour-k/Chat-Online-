@@ -6,7 +6,8 @@
       <form (ngSubmit)="onSubmit(f)" #f="ngForm" fx>
         <mat-form-field class="example-full-width">
           <mat-label>Add a new Room</mat-label>
-          <input matInput placeholder="Ex. Pizza" id="roomName" name="roomName" ngModel required>
+          <input matInput #input maxlength="30" placeholder="Ex. Pizza" id="roomName" name="roomName" ngModel required>
+          <mat-hint align="end">{{input.value?.length || 0}}/30</mat-hint>
         </mat-form-field>
         <div>
           <button type = 'submit' mat-raised-button  color="primary" [disabled]='f.invalid'>ok</button>
@@ -23,9 +24,16 @@
 </mat-divider> 
 
 <div id='colone-chat' fxFlex="80%">
-  <div class='chat' fxLayout="column" fxLayoutAlign="space-between start" fxLayoutGap="gappx">
-    <app-message ></app-message>
-    <app-box-input-message></app-box-input-message>
+
+  <div class='chat' fxLayout="column" >
+    <div class='messageContentChat'>
+      <simple-notifications></simple-notifications>
+      <app-message ></app-message>
+    </div>
+    
+    <div class="inboxContentChat">
+      <app-box-input-message></app-box-input-message>
+    </div>
   </div>
 </div>
 

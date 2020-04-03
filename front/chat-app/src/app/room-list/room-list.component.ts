@@ -24,7 +24,7 @@ export class RoomListComponent implements OnInit {
   }
  
   loadRoom(id: number) {
-    this.chatService.getAllMessagesByRoomId(id);  
+    this.chatService.getAllMessagesByRoomId(id);
   }
 
   deleteRoom(id: number) {

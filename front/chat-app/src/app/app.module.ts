@@ -28,6 +28,7 @@ import { BoxInputMessageComponent } from './box-input-message/box-input-message.
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { AvatarModule } from 'ngx-avatar';
 import { HttpClientModule } from '@angular/common/http';
+import { SimpleNotificationsModule } from 'angular2-notifications';
 
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
@@ -73,7 +74,8 @@ const config: SocketIoConfig = {  url: 'http://localhost:8988', options: {} };
     MatCardModule,
     ScrollingModule,
     HttpClientModule,
-    AvatarModule
+    AvatarModule,
+    SimpleNotificationsModule.forRoot({ position : ['top', 'right']})
   ],
   providers: [CookieService, ChatService, Room, UserService, AuthGuard],
   bootstrap: [AppComponent]

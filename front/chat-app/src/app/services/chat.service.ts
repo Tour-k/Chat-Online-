@@ -15,6 +15,8 @@ export class ChatService {
 
     messages = this.socket.fromEvent<any>('messages');
 
+    notificationIn = this.socket.fromEvent<string>('notificationIn');
+    notificationOut = this.socket.fromEvent<string>('notificationOut');
 
     constructor(private socket: Socket, private userService: UserService, private cookieService: CookieService) {}
 
@@ -35,7 +37,9 @@ export class ChatService {
     }
 
     getAllMessagesByRoomId(roomId: number) {
-        this.socket.emit('getRoom', roomId);
+        const userName = this.userService.currentUserName;
+        const data = [roomId, userName];
+        this.socket.emit('getRoom', data);
     }
 
     sendMessage(channelId, userId, msg: string) {
@@ -45,4 +49,9 @@ export class ChatService {
     getAllRooms() {
         this.socket.emit('getAllRooms');
     }
+
+    updateRoom(roomId: number, newName: string ) {
+        this.socket.emit('updateRoom', [roomId, newName]);
+    }
+
 }

@@ -29,7 +29,7 @@ export class LoginWithAccountComponent implements OnInit, OnDestroy {
       this.currentUsername = user.username;
       // TODO : utiliser le cookie plutôt...
       // this.userService.setCurrentUserId(user.id);
-      // this.userService.setCurrentUserName(user.username);
+      this.userService.setCurrentUserName(user.username);
     });
   }
 

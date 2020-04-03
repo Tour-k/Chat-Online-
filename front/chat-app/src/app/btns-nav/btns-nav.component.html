@@ -1,11 +1,11 @@
 <div class="button-row">
-  <button mat-mini-fab color="primary" [routerLink]="['/']" >
+  <button mat-mini-fab color="primary" [routerLink]="['/']" class="buttonMenuChat">
     <mat-icon aria-hidden="false" aria-label="home icon">home</mat-icon>
   </button>
-  <button mat-mini-fab color="common" (click)="logout()">
+  <button mat-mini-fab color="common" (click)="logout()" class="buttonMenuChat">
     <mat-icon aria-hidden="false" aria-label="logout icon">logout</mat-icon>
   </button>
-  <button mat-mini-fab color="common" [routerLink]="['/profile']">
+  <button mat-mini-fab color="common" [routerLink]="['/profile']" class="buttonMenuChat">
     <mat-icon aria-hidden="false" aria-label="settings icon">settings</mat-icon>
   </button>
 </div>
