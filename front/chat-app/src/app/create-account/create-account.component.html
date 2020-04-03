@@ -14,6 +14,9 @@
           <mat-label for="username">Username</mat-label>
           <input type="text" id="username" name="username" ngModel matInput placeholder="Username">
         </mat-form-field>
+        <div *ngIf="errDupEntry">
+          <p class="errorInput">Dommage ! Le pseudo {{userNameSend}} est déjà pris...</p>
+        </div>
         <mat-form-field class="field-full-width">
           <mat-label for="password">Password</mat-label>
           <input type="password" id="password"  name="password" ngModel matInput placeholder="Password">
@@ -26,7 +29,6 @@
         <button mat-stroked-button (click)="toHome()" color="accent" class="btn-block">Accueil</button>
         <button mat-stroked-button (click)="toLogin()" color="accent" class="btn-block">Se connecter</button>
       </div>
-      {{ errDupEntry }}
     </form>
   </mat-card>
 </div>

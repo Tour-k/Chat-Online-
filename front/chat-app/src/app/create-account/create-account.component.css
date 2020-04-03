@@ -68,3 +68,8 @@
   top: 350px;
   left: 40%;
 }
+
+.errorInput{
+  color: darkred;
+  text-align: center;
+}

@@ -39,7 +39,7 @@ conn.connect(function(err) {
     // ___________________________________
     CRUDChannel.getAllChannels(conn, (res)=>{
       io.emit("rooms", res);
-    })
+    });
     
     let previousId;
     const safeJoin = (currentId, username) => {
@@ -59,7 +59,7 @@ conn.connect(function(err) {
         io.emit("rooms", res);
         socket.emit('rooms', res);
       })
-    })
+    });
 
     // ___________________________________
     //récupération les messages d'un channel
@@ -73,7 +73,7 @@ conn.connect(function(err) {
         });
         socket.emit('room', res[0])
         // console.log( res[0] + " : en faisant un GET")
-      })
+      });
       CRUDMessage.getAllMessagesByChannelId(conn, data[0], (res)=>{
         res.forEach(element => {
           element.message = unescape(element.message);
@@ -91,7 +91,7 @@ conn.connect(function(err) {
       // safeJoin(room.id);
       CRUDChannel.createChannel(conn, escape(String(room.nom)), parseInt(room.userId), function(res){
         console.log(res)
-      })
+      });
       // CRUDChannel.getChannelById(conn, room.id, res=>{
       //   console.log('GET :' + room.id);
       //   socket.emit('room', res); // emitting back to client
@@ -115,10 +115,10 @@ conn.connect(function(err) {
     socket.on('deleteRoom', roomId =>{
       CRUDMessage.deleteAllMessageByChannelId(conn, roomId, res=>{
         console.log(res);
-      })
+      });
       CRUDChannel.deleteChannel(conn, roomId, res=>{
         console.log(res);
-      })
+      });
       CRUDChannel.getAllChannels(conn, function(res){
         res.forEach(element => {
           element.nom = unescape(element.nom);
@@ -135,14 +135,14 @@ conn.connect(function(err) {
       console.log(data[1]);
       CRUDChannel.updateChannelName(conn, data[0], escape(String(data[1])), (res)=>{
         console.log(res);
-      })
+      });
       CRUDChannel.getAllChannels(conn, function(res){
         res.forEach(element => {
           element.nom = unescape(element.nom);
         });
         rooms = res;
         io.emit("rooms", rooms);
-      })
+      });
 
       safeJoin(data[0], data[1]);
       socket.broadcast.to(data[0]).emit('notificationIn', data[1]);
@@ -152,7 +152,7 @@ conn.connect(function(err) {
         });
         socket.emit('room', res[0])
         // console.log( res[0] + " : en faisant un GET")
-      })
+      });
       CRUDMessage.getAllMessagesByChannelId(conn, data[0], (res)=>{
         res.forEach(element => {
           element.message = unescape(element.message);
@@ -160,7 +160,7 @@ conn.connect(function(err) {
         // console.log(JSON.stringify(res));
         socket.emit("messages", res) 
       })
-    })
+    });
 
     // ___________________________________
     // ADD message
@@ -168,7 +168,7 @@ conn.connect(function(err) {
     socket.on("addMessage", dataArray => {
       CRUDMessage.createMessage(conn, dataArray[0], dataArray[1], escape(dataArray[2]), res=>{
         console.log(dataArray[2] + ' : message enregistré');
-      })
+      });
       CRUDMessage.getAllMessagesByChannelId(conn, dataArray[0], (res)=>{
         res.forEach(element => {
           element.message = unescape(element.message);
