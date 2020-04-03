@@ -6,7 +6,7 @@
       <form (ngSubmit)="onSubmit(f)" #f="ngForm" fx>
         <mat-form-field class="example-full-width">
           <mat-label>Add a new Room</mat-label>
-          <input matInput #input maxlength="30" placeholder="Ex. Pizza" id="roomName" name="roomName" ngModel required>
+          <input matInput #input maxlength="30" placeholder="Nom du channel" id="roomName" name="roomName" ngModel required>
           <mat-hint align="end">{{input.value?.length || 0}}/30</mat-hint>
         </mat-form-field>
         <div>
