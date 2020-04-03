@@ -206,7 +206,6 @@ conn.connect(function(err) {
                   }
                   CRUDUser.createUser(conn, String(user.username), String(hashPassword), String(user.bio), String(user.avatar), (resMessage, user, username) => {
                       console.log("res message : " + resMessage);
-                      console.log(user);
                       socket.emit('newUserBack', user);
                   })
               })

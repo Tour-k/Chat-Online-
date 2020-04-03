@@ -28,7 +28,6 @@ export class CreateAccountComponent implements OnInit {
       this.errDupEntry = res;
     });
     this.newUserSubscription = this.userService.newUser.subscribe((user) => {
-      console.log(user[1][0].id);
       this.newUserId = user[1][0].id;
       this.newUserName = user[1][0].username;
       if (!this.errDupEntry) {

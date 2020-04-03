@@ -41,11 +41,6 @@ export class UserService {
     this.registred = false;
   }
 
-  getUserIdByUserName(username) {
-    console.log('Username in Get UserID By UserName : ' + username);
-    this.socket.emit('getUserId', username);
-  }
-
   //TODO a supprimer 
   setCurrentUserName(username) {
     this.currentUserName = username ;
