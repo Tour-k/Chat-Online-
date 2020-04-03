@@ -53,6 +53,7 @@
             <ng-template #FormTemp>
               <form class="form" (ngSubmit)="onUpdateMessage(f, msg.id)" #f="ngForm" >
                 <mat-form-field class="field-full-width">
+            
                   <mat-label for="msg">Modify Message </mat-label>
                   <input type="text" id="msg" name="msg" ngModel matInput placeholder="{{msg.message}}">
     
