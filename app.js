@@ -192,7 +192,8 @@ conn.connect(function(err) {
         res.forEach(element => {
           element.message = unescape(element.message);
         });
-        socket.emit("messages", res) // initiating client only
+        socket.emit("messages", res)
+        socket.broadcast.emit("messages", res) // initiating client only
       })
       
     })
