@@ -26,12 +26,11 @@ export class MessageComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.messages = this.chatServie.messages;
-    this.messagesSubscription = this.messages.subscribe(()=> this.update = false);
+    this.messagesSubscription = this.messages.subscribe(() => this.update = false);
     this._roomSub = this.chatServie.currentRoom.subscribe((room) => {
       this.currentRoom = room.nom;
       this.currentRoomId = room.id;
       this.registred = true;
-      
     });
   }
 

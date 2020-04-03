@@ -15,6 +15,7 @@ export class CreateAccountComponent implements OnInit {
   errDupEntry = false;
   newUser: User;
   newUserId: null;
+  newUserName: string;
 
   errDupEntrySubscription: Subscription;
   newUserSubscription: Subscription;
@@ -27,22 +28,22 @@ export class CreateAccountComponent implements OnInit {
       this.errDupEntry = res;
     });
     this.newUserSubscription = this.userService.newUser.subscribe((user) => {
-      console.log(user[0].insertId);
-      this.newUserId = user[0].insertId;
+      console.log(user[1][0].id);
+      this.newUserId = user[1][0].id;
+      this.newUserName = user[1][0].username;
+      if (!this.errDupEntry) {
+        this.cookieService.set('userName', this.newUserName);
+        this.cookieService.set('userId', this.newUserId);
+        this.userService.setCurrentUserName(this.newUserName);
+        this.userService.firstLogin();
+        this.router.navigateByUrl('chat');
+      }
     });
   }
 
   onRegister(form: NgForm) {
     this.errDupEntry = false;
     this.userService.register(form.value);
-    if (this.errDupEntry) {
-      return
-    } else {
-      this.cookieService.set('userName', form.value.username);
-      this.cookieService.set('userId', this.newUserId);
-     // var values = [];
-     // this.userService.login([username:form.value.username, password:form.value.username ]);
-    }
   }
 
   toLogin() {

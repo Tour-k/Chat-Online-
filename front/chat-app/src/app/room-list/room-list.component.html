@@ -1,10 +1,10 @@
 <mat-list>
-    <mat-list-item  *ngFor='let room of rooms | async'> 
-        
-        <fa-icon (click)='deleteRoom(room.id)' [icon]="faTrash"> </fa-icon>
-        <div id="room-list" (click)='loadRoom(room.id)'>
-            {{ room.nom }}
-        </div>
-         
-    </mat-list-item>
+  <mat-list-item  *ngFor='let room of rooms | async'>
+
+    <fa-icon (click)='deleteRoom(room.id)' [icon]="faTrash"> </fa-icon>
+    <div id="room-list" (click)='loadRoom(room.id)'>
+      {{ room.nom }}
+    </div>
+
+  </mat-list-item>
 </mat-list>
