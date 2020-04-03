@@ -21,31 +21,60 @@
   
 
 
-    <mat-list role="list">
-        <mat-list-item  *ngFor='let msg of messages | async' class="messageListItem" role="listitem">
+  <mat-list role="list">
+    <mat-list-item  *ngFor='let msg of messages | async' class="messageListItem" role="listitem">
 
-            <div fxFlex="50px" fxFlexAlign="start"class="avatar" >
-                <ngx-avatar [round]="false" name={{msg.username}} [cornerRadius]="10" > </ngx-avatar>
-            </div>
+      <div fxFlex="50px" fxFlexAlign="start"class="avatar" >
+          <ngx-avatar [round]="false" name={{msg.username}} [cornerRadius]="10" > </ngx-avatar>
+      </div>
 
 
 
-            <div fxLayout="column" fxLayoutAlign="start start" class="contentMessage">
+      <div fxLayout="column" fxLayoutAlign="start start" class="contentMessage">
 
-                <div fxLayout="row">
+        <div fxLayout="row">
 
-                    <div class="messageUsername">{{msg.username}} :  </div>
-                    <div class="messageDate">{{msg.updateat | date :'HH:mm z' }} </div>
+            <div class="messageUsername">{{msg.username}} :  </div>
+            <div class="messageDate">{{msg.updateat | date :'HH:mm z' }} </div>
 
+        </div>
+
+        <div fxLayout="row" fxLayoutAlign="space-between start"> 
+
+          <ng-container *ngIf="!boolUpdateMessage; else updateMessageTemp">
+            <fa-icon [icon]="faPen" *ngIf="msg.User_id === currentUserId" class='penIcon' (click)=updateMessage(msg.id)></fa-icon>
+            <div class="message"> {{ msg.message }} </div>
+          </ng-container>
+
+          <ng-template #updateMessageTemp>
+            <ng-container *ngIf="msg.id != msgToUpdate ; else FormTemp">
+              <div class="message"> {{ msg.message }} </div>
+            </ng-container>
+            <ng-template #FormTemp>
+              <form class="form" (ngSubmit)="onUpdateMessage(f, msg.id)" #f="ngForm" >
+                <mat-form-field class="field-full-width">
+                  <mat-label for="msg">Modify Message </mat-label>
+                  <input type="text" id="msg" name="msg" ngModel matInput placeholder="{{msg.message}}">
+    
+                </mat-form-field>
+                <div fxLayoutAlign="end center" class="btn-action">
+                  <button type="submit">Valider</button>
+                  <button (click)=onAnnulerUpdateMessage()>Annuler</button>
                 </div>
+              </form>
+            </ng-template>
+          </ng-template>
+          
+          
+          
+        </div>
+          
 
-                <div class="message">{{ msg.message }}</div>
-
-            </div>
+      </div>
 
 
-            <!-- <mat-divider class="divider">
-            </mat-divider> -->
+        <!-- <mat-divider class="divider">
+        </mat-divider> -->
 
     </mat-list-item>
   </mat-list>

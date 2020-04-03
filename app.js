@@ -181,6 +181,22 @@ conn.connect(function(err) {
       })
     });
 
+    // ___________________________________
+    // UPDATE message
+    // ___________________________________
+    socket.on("updateMessage", dataArray =>{
+      CRUDMessage.updateMessage(conn, dataArray[0], dataArray[1], (res)=>{
+        console.log(res);
+      })
+      CRUDMessage.getAllMessagesByChannelId(conn, dataArray[2], (res)=>{
+        res.forEach(element => {
+          element.message = unescape(element.message);
+        });
+        socket.emit("messages", res) // initiating client only
+      })
+      
+    })
+
 
     // Creer un utilisateur
     socket.on('newUser', user => {
