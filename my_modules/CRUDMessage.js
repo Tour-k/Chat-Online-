@@ -2,7 +2,7 @@
 // GET All Message By Channel Id (test OK)
 // ___________________________________
 var getAllMessagesByChannelId = function(conn, channelId, callback){
-    conn.query("SELECT Message.id, Message.message, Message.updateat ,User.username FROM Message INNER JOIN User ON Message.User_id = User.id WHERE Channel_id =" + channelId ,
+    conn.query("SELECT Message.id, Message.message, Message.updateat, Message.User_id ,User.username FROM Message INNER JOIN User ON Message.User_id = User.id WHERE Channel_id =" + channelId ,
     function (err, result, fields) {
         if (err) throw err;
         callback(result);
@@ -46,6 +46,14 @@ var deleteMessage = function(conn, id, callback){
 }
 
 // TODO : CRUD UPDATE message
+var updateMessage = function(conn , id , msg, callback){
+    var sql = "UPDATE Message SET message = '" + msg + "' WHERE id = " + id; 
+    conn.query(sql, (err, res)=>{
+        if (err) throw err;
+        message = 'Number of records update :' + res.affectedRows;
+        callback(message);
+    })
+}
 
 
 
@@ -53,3 +61,4 @@ exports.getAllMessagesByChannelId = getAllMessagesByChannelId;
 exports.deleteAllMessageByChannelId = deleteAllMessageByChannelId;
 exports.createMessage = createMessage;
 exports.deleteMessage = deleteMessage;
+exports.updateMessage = updateMessage;
