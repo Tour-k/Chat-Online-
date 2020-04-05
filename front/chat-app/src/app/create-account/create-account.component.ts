@@ -36,6 +36,8 @@ export class CreateAccountComponent implements OnInit {
         this.cookieService.set('userId', this.newUserId);
         this.userService.setCurrentUserName(this.newUserName);
         this.userService.firstLogin();
+        this.userService.setCurrentUserName(this.newUserName);
+        this.userService.setCurrentUserId(this.newUserId);
         this.router.navigateByUrl('chat');
       }
     });
