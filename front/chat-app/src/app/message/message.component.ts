@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { ChatService } from '../services/chat.service';
 import {NgForm} from '@angular/forms';
@@ -22,11 +22,13 @@ export class MessageComponent implements OnInit, OnDestroy {
   currentRoom: string ;
   currentRoomId : number;
   private _roomSub: Subscription;
+  
 
   currentUserId : number;
 
   registred = false ;
   update = false;
+  
   boolUpdateMessage = false;
   msgToUpdate : number;
 
@@ -45,8 +47,10 @@ export class MessageComponent implements OnInit, OnDestroy {
       this.registred = true;
       
     this.currentUserId = this.userService.currentUserId;
-
     });
+
+   
+
   }
 
   ngOnDestroy() {

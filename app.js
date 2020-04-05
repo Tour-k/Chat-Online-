@@ -150,7 +150,9 @@ conn.connect(function(err) {
         res.forEach(element => {
           element.nom = unescape(element.nom);
         });
+      
         socket.emit('room', res[0])
+        socket.broadcast.to(data[0]).emit('room', res[0]);
         // console.log( res[0] + " : en faisant un GET")
       });
       CRUDMessage.getAllMessagesByChannelId(conn, data[0], (res)=>{
