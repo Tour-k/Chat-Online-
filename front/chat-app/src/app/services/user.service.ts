@@ -3,7 +3,7 @@ import { Socket } from 'ngx-socket-io';
 import { User } from 'src/models/user';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
-import {Room} from "../../models/room";
+import {Room} from '../../models/room';
 
 @Injectable()
 export class UserService {
@@ -14,12 +14,13 @@ export class UserService {
   registred = false;
 
   currentUser = this.socket.fromEvent<User>('user');
-   
   currentUserName: string;
   currentUserId: number;
 
   constructor(private socket: Socket, private router: Router) {
-    this.testLoginSubscription = this.testLoginRes.subscribe((res) => {this.registred = res; this.router.navigate(['chat']);});
+    this.testLoginSubscription = this.testLoginRes.subscribe((res) => {
+      this.registred = res; this.router.navigate(['chat']);
+    });
   }
 
   register(values: any) {
@@ -46,12 +47,9 @@ export class UserService {
     this.socket.emit('getUserId', username);
   }
 
-  
-
   setCurrentUserName(username) {
     this.currentUserName = username ;
   }
-  
   setCurrentUserId(userid) {
     this.currentUserId = userid ;
   }

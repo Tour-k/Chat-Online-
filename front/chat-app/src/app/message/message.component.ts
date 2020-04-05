@@ -20,32 +20,31 @@ export class MessageComponent implements OnInit, OnDestroy {
   messages: Observable<object>;
   messagesSubscription: Subscription;
   currentRoom: string ;
-  currentRoomId : number;
+  currentRoomId: number;
   private _roomSub: Subscription;
 
-  currentUserId : number;
+  currentUserId: number;
 
   registred = false ;
   update = false;
   boolUpdateMessage = false;
-  msgToUpdate : number;
+  msgToUpdate: number;
 
   constructor(private chatServie: ChatService, private userService: UserService) { }
 
   ngOnInit(): void {
     this.messages = this.chatServie.messages;
 
-    this.messagesSubscription = this.messages.subscribe(()=> {
+    this.messagesSubscription = this.messages.subscribe(() => {
       this.boolUpdateMessage = false;
-      this.update = false});
+      this.update = false;
+    });
 
     this._roomSub = this.chatServie.currentRoom.subscribe((room) => {
       this.currentRoom = room.nom;
       this.currentRoomId = room.id;
       this.registred = true;
-      
-    this.currentUserId = this.userService.currentUserId;
-
+      this.currentUserId = this.userService.currentUserId;
     });
   }
 
@@ -54,22 +53,22 @@ export class MessageComponent implements OnInit, OnDestroy {
     this._roomSub.unsubscribe();
   }
 
-  updateRoom(){
+  updateRoom() {
     this.update = true;
   }
 
-  onUpdate(form :NgForm){
+  onUpdate(form: NgForm) {
     this.chatServie.updateRoom(this.currentRoomId, form.value.roomName);
   }
-  onAnnuler(){
+  onAnnuler() {
     this.update = false;
   }
-  updateMessage(msgId : number){
+  updateMessage(msgId: number) {
     this.boolUpdateMessage = true;
     this.msgToUpdate = msgId ;
   }
 
-  onUpdateMessage(form :NgForm, id : number){
+  onUpdateMessage(form :NgForm, id: number) {
     this.chatServie.updateMessage(id, form.value.msg, this.currentRoomId);
   }
 
